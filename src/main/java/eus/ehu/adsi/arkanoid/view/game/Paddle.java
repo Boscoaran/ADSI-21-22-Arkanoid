@@ -52,8 +52,4 @@ public class Paddle extends Rectangle {
 		return sizeX;
 	}
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/feature-premios

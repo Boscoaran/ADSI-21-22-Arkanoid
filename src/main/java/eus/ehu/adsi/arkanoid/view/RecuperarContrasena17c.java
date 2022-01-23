@@ -172,8 +172,4 @@ public class RecuperarContrasena17c extends JFrame {
     private void cerrarActual() {
         this.dispose();
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/feature-premios

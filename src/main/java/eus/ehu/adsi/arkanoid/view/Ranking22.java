@@ -290,15 +290,6 @@ public class Ranking22 {
 		return panelIndividualUpdate;
 	}
 
-<<<<<<< HEAD
-    private JLabel getLblJugador(String nombre, Integer puntos) {
-            String p = ".";
-			String puntosStr = Integer.toString(puntos);
-            String separacion = p.repeat(60 - nombre.length()-puntosStr.length()*(puntosStr.length()));
-            lblJugador = new JLabel(nombre + separacion + puntos);
-			lblJugador.setForeground(Color.WHITE);
-            lblJugador.setFont(impact.deriveFont(20.0f));
-=======
 	private JLabel getLblJugador(String nombre, Integer puntos) {
 		String p = ".";
 		String puntosStr = Integer.toString(puntos);
@@ -306,7 +297,6 @@ public class Ranking22 {
 		lblJugador = new JLabel(nombre + separacion + puntos);
 		lblJugador.setForeground(Color.WHITE);
 		lblJugador.setFont(impact.deriveFont(20.0f));
->>>>>>> origin/feature-premios
 		return lblJugador;
 	}
 

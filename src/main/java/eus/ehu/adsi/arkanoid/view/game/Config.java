@@ -42,11 +42,7 @@ public abstract class Config {
 	public static Boolean SONIDO;
 
 
-<<<<<<< HEAD
-    public static final Color BRICK_COLOR_SUERTE = Color.yellow;
-=======
 	public static final Color BRICK_COLOR_SUERTE = Color.yellow;
->>>>>>> origin/feature-premios
 
 	public static void setSonido(Boolean activar){
 		SONIDO = activar;

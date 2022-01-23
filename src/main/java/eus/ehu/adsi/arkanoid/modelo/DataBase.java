@@ -334,7 +334,7 @@ public class DataBase {
         return;
     }
 
-    public JSONObject buscarUsuario(String nombreUsuario) throws SQLException {
+    public JSONObject buscarUsuario(String nombreUsuario, String contra) throws SQLException {
 
         JSONObject j = new JSONObject();
         Connection con = null;
@@ -346,7 +346,7 @@ public class DataBase {
 		}
         ResultSet rs;
         Statement s = con.createStatement();
-        rs = s.executeQuery("SELECT * FROM usuario WHERE nombreUsuario = \""+nombreUsuario+"\"");
+        rs = s.executeQuery("SELECT * FROM usuario WHERE NombreUsuario = \""+nombreUsuario+"\" AND Contraseña= \"" + contra +"\"");
         boolean b = rs.next();
         if (b) {
             j.put("nombreUsuario", rs.getString(1));

@@ -64,11 +64,6 @@ public class Usuario {
         this.colorLadrillos = new ColorLadrillos(colorLadrillo);
         this.sonido = new AjusteSonido(sonido);
     }
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> origin/feature-premios
     /**
      * Cambiar la contraseña actual
      * @param pContrasena contraseña nueva
@@ -78,15 +73,9 @@ public class Usuario {
     }
 
     public String getNombre() {
-<<<<<<< HEAD
-    	return nombreUsuario;
-    }
-    
-=======
         return nombreUsuario;
     }
 
->>>>>>> origin/feature-premios
     public List<Premio> otorgarPremios(List<Premio> pPremios){
         List<Premio> POtorgados = new ArrayList<Premio>();
         Premio PActual;

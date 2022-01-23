@@ -45,16 +45,11 @@ public class AvisoVentanaExterna24b {
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();
-
+			panel.setBackground(Color.black);
 			GridLayout layout= new GridLayout(2,1);
 			layout.setVgap(20);
 
 			panel.setLayout(layout);
-<<<<<<< HEAD
-			
-=======
-
->>>>>>> origin/feature-premios
 			JLabel labelTexto =new JLabel("Se va a abrir una pagina web externa al sistema Arkanoid");
 			labelTexto.setForeground(Color.WHITE);
 			labelTexto.setFont(impact.deriveFont(20.0f));
@@ -118,11 +113,7 @@ public class AvisoVentanaExterna24b {
 				public void mouseClicked(MouseEvent e) {
 					try {
 						frameFigura.dispose();
-<<<<<<< HEAD
-                		java.awt.Desktop.getDesktop().browse(linkRedSocial);               		
-=======
 						java.awt.Desktop.getDesktop().browse(linkRedSocial);
->>>>>>> origin/feature-premios
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
@@ -137,19 +128,6 @@ public class AvisoVentanaExterna24b {
 				}
 
 			});
-<<<<<<< HEAD
-    		
-        }
-        
-        return botonAceptar;
-    }
-
-	public URI getUri(){
-        return linkRedSocial;
-    }
-
-}
-=======
 
 		}
 
@@ -161,4 +139,3 @@ public class AvisoVentanaExterna24b {
 	}
 
 }
->>>>>>> origin/feature-premios

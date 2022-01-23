@@ -50,13 +50,8 @@ public class Personalizacion21 {
 	private String nombreUsuario;
 	private JLabel lblTitulo;
 	private Font impact = AddFont.createFont();
-<<<<<<< HEAD
-	
-	
-=======
 
 
->>>>>>> origin/feature-premios
 	public Personalizacion21(String nombre) {
 		nombreUsuario = nombre;
 		initialize();
@@ -76,11 +71,6 @@ public class Personalizacion21 {
 		frame.setBackground(Color.BLACK);
 		frame.setVisible(true);
 	}
-<<<<<<< HEAD
-	
-=======
-
->>>>>>> origin/feature-premios
 	private JPanel getPanelCentro(JSONObject j) {
 		if (panelCentro == null) {
 			panelCentro = new JPanel();
@@ -100,11 +90,7 @@ public class Personalizacion21 {
 			gbc_lblTitulo.gridy = 0;
 			panelCentro.add(getLblTitulo(), gbc_lblTitulo);
 
-<<<<<<< HEAD
-            //LBL BG
-=======
 			//LBL BG
->>>>>>> origin/feature-premios
 			GridBagConstraints gbc_lblBackGround = new GridBagConstraints();
 			gbc_lblBackGround.anchor = GridBagConstraints.EAST;
 			gbc_lblBackGround.insets = new Insets(0, 0, 0, 0);
@@ -154,13 +140,8 @@ public class Personalizacion21 {
 			panelCentro.add(getComboBoxBall(), gbc_comboBoxBall);
 
 
-<<<<<<< HEAD
-            //CB PADDLE
-            GridBagConstraints gbc_comboBoxPaddle = new GridBagConstraints();
-=======
 			//CB PADDLE
 			GridBagConstraints gbc_comboBoxPaddle = new GridBagConstraints();
->>>>>>> origin/feature-premios
 			gbc_comboBoxPaddle.insets = new Insets(0, 10, 0, 0);
 			gbc_comboBoxPaddle.fill = GridBagConstraints.HORIZONTAL;
 			gbc_comboBoxPaddle.gridx = 1;
@@ -204,11 +185,6 @@ public class Personalizacion21 {
 		}
 		return panelCentro;
 	}
-<<<<<<< HEAD
-	//BTN ACEPTAR permite guardar los datos seleccionados por el usuario
-=======
-
->>>>>>> origin/feature-premios
 	private JButton getBtnAceptar() {
 		if (btnAceptar == null) {
 			btnAceptar = new JButton("Aceptar");
@@ -220,11 +196,6 @@ public class Personalizacion21 {
 			btnAceptar.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-<<<<<<< HEAD
-					
-=======
-
->>>>>>> origin/feature-premios
 					String colorBola = comboBoxBall.getSelectedItem().toString();
 					String colorPadel = comboBoxPaddle.getSelectedItem().toString();
 					String colorLadrillo = comboBoxLadrillo.getSelectedItem().toString();
@@ -246,13 +217,8 @@ public class Personalizacion21 {
 		}
 		return btnAceptar;
 	}
-<<<<<<< HEAD
-	//BTN CANCELAR permite cancelar los cambios hechos y devuelve al menú principal
-    private JButton getBtnCancelar() {
-=======
 
 	private JButton getBtnCancelar() {
->>>>>>> origin/feature-premios
 		if (btnCancelar == null) {
 			btnCancelar = new JButton("Cancelar");
 			btnCancelar.setBorderPainted(false);
@@ -284,11 +250,7 @@ public class Personalizacion21 {
 			lblTitulo = new JLabel("Ajustes", JLabel.CENTER);
 			lblTitulo.setFont(impact.deriveFont(80.0f));
 			lblTitulo.setForeground(Color.WHITE);
-<<<<<<< HEAD
-			}
-=======
 		}
->>>>>>> origin/feature-premios
 		return lblTitulo;
 	}
 	private JLabel getLblBackGround() {
@@ -374,11 +336,6 @@ public class Personalizacion21 {
 		}
 		return comboBoxLadrillo;
 	}
-<<<<<<< HEAD
-	//Añadimos los colores seleccionados al desplegable
-=======
-
->>>>>>> origin/feature-premios
 	private void añadirColores(JComboBox comboBox, JSONObject colores){
 		Iterator <String> keys = colores.keys();
 		while(keys.hasNext()){
@@ -403,15 +360,6 @@ public class Personalizacion21 {
 				comboBox.addItem(sb.toString());
 			}
 		}
-<<<<<<< HEAD
-		
-	}
-	//Si el sonido esta pulsado se muestra su correspondiente imagen y activa la cancion
-    private JButton getBtnSonido(int s) {
-		if (btnSonido == null) {
-			
-            btnSonido = new JButton("");
-=======
 
 	}
 
@@ -419,7 +367,6 @@ public class Personalizacion21 {
 		if (btnSonido == null) {
 
 			btnSonido = new JButton("");
->>>>>>> origin/feature-premios
 			try {
 				ImageIcon imgIcon;
 				if (s == 1) {
@@ -428,18 +375,6 @@ public class Personalizacion21 {
 				} else {
 					sonido = false;
 					imgIcon = new ImageIcon("src/main/resources/muted.png");
-<<<<<<< HEAD
-				} 
-                Image image = imgIcon.getImage();
-				Image imageReszie = image.getScaledInstance(100,80, java.awt.Image.SCALE_SMOOTH);
-				imgIcon = new ImageIcon(imageReszie);
-				btnSonido.setIcon(imgIcon);
-            } catch (Exception ex){
-                System.out.println(ex);
-            }
-
-            btnSonido.setContentAreaFilled(false);
-=======
 				}
 				Image image = imgIcon.getImage();
 				Image imageReszie = image.getScaledInstance(100,80, java.awt.Image.SCALE_SMOOTH);
@@ -450,7 +385,6 @@ public class Personalizacion21 {
 			}
 
 			btnSonido.setContentAreaFilled(false);
->>>>>>> origin/feature-premios
 			btnSonido.setFocusPainted(false);
 			btnSonido.setBorderPainted(false);
 			btnSonido.setBackground(Color.BLACK);
@@ -460,22 +394,14 @@ public class Personalizacion21 {
 				public void mouseClicked(MouseEvent e) {
 					if (sonido){
 						ImageIcon imgIcon = new ImageIcon("src/main/resources/muted.png");
-<<<<<<< HEAD
-                		Image image = imgIcon.getImage();
-=======
 						Image image = imgIcon.getImage();
->>>>>>> origin/feature-premios
 						Image imageReszie = image.getScaledInstance(100,80, java.awt.Image.SCALE_SMOOTH);
 						imgIcon = new ImageIcon(imageReszie);
 						btnSonido.setIcon(imgIcon);
 						sonido = false;
 					} else {
 						ImageIcon imgIcon = new ImageIcon("src/main/resources/unmuted.png");
-<<<<<<< HEAD
-               			Image image = imgIcon.getImage();
-=======
 						Image image = imgIcon.getImage();
->>>>>>> origin/feature-premios
 						Image imageReszie = image.getScaledInstance(100,80, java.awt.Image.SCALE_SMOOTH);
 						imgIcon = new ImageIcon(imageReszie);
 						btnSonido.setIcon(imgIcon);

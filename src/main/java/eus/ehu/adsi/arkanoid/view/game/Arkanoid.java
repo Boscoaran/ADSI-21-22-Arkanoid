@@ -19,6 +19,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import eus.ehu.adsi.arkanoid.controlador.ArkanoidFrontera;
+import eus.ehu.adsi.arkanoid.view.PremiosConseguidos23;
 import eus.ehu.adsi.arkanoid.view.game.core.Game;
 
 public class Arkanoid extends JFrame implements KeyListener {
@@ -242,6 +243,7 @@ public class Arkanoid extends JFrame implements KeyListener {
 		}
 		if (scoreboard.win || scoreboard.gameOver) {
 			if (event.getKeyCode() == KeyEvent.VK_SPACE) {
+				ArkanoidFrontera.getArkanoidFrontera().terminarPartida(ArkanoidFrontera.getArkanoidFrontera().buscarPartida(nombre));
 				this.dispose();
 			}
 		}

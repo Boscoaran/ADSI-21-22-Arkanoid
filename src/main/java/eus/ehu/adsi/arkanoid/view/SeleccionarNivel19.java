@@ -30,11 +30,6 @@ public class SeleccionarNivel19 {
 	private JLabel lblNivel;
 	private JComboBox<String> comboBoxNivel;
 	private Font impact = AddFont.createFont();
-<<<<<<< HEAD
-	
-=======
-
->>>>>>> origin/feature-premios
 
 	public SeleccionarNivel19() {
 		initialize();

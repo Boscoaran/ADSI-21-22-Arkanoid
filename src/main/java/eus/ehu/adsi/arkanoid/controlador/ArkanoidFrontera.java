@@ -746,4 +746,9 @@ public class ArkanoidFrontera {
         return joDatos;
     }
 
+    public Partida buscarPartida(String nombre) {
+        Usuario u = GestorUsuarios.getGestorUsuarios().buscarUsuarioGestor(nombre);
+        return GestorPartidas.getGestorPartidas().buscarPartidaActual(u);
+    }
+
 }
