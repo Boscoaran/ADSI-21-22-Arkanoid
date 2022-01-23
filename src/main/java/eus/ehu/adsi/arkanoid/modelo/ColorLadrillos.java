@@ -1,9 +1,8 @@
 package eus.ehu.adsi.arkanoid.modelo;
 
-public class ColorLadrillos {
-    private ColorLadrillos color;
+public class ColorLadrillos extends Personalizable{
 
-    public ColorLadrillos(ColorLadrillos colorLadrillos) {
-        color = colorLadrillos;
+    public ColorLadrillos(String c) {
+        super(c);
     }
 }

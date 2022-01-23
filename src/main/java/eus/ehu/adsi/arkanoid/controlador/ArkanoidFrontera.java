@@ -4,16 +4,20 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.SwingUtilities;
 
+import eus.ehu.adsi.arkanoid.view.PremiosConseguidos23;
 import org.json.JSONObject;
 
 import eus.ehu.adsi.arkanoid.core.ArkanoidThread;
 import eus.ehu.adsi.arkanoid.modelo.Arkanoid;
 import eus.ehu.adsi.arkanoid.modelo.DataBase;
 import eus.ehu.adsi.arkanoid.modelo.Usuario;
+import eus.ehu.adsi.arkanoid.modelo.Partida;
+import eus.ehu.adsi.arkanoid.modelo.Premio;
 
 public class ArkanoidFrontera {
     private static ArkanoidFrontera mArkanoidFrontera = null;
@@ -220,7 +224,26 @@ public class ArkanoidFrontera {
         arkanoidThread.start();
     }
 
+    public void terminarPartida(Partida p){ //TODO: EN VEZ DE UN PARÁMETRO IGUAL TIENE QUE HACER EL NEW PARTIDA
+        p.getJugador().actualizarPartida(p);
+        comprobarPremios(p);
+    }
+
     public int getLvl(){
         return lvl;
+    }
+
+    private void comprobarPremios(Partida p){
+        List<Premio> PC = GestorPremios.getGestorPremios().comprobarPremios(p);
+        List<Premio> PO = GestorPremios.getGestorPremios().otorgarPremios(p.getJugador(),PC);
+        if (PO.size()>0){
+            GestorPremios.getGestorPremios().annadirPremios(p, PO);
+            JSONObject premios = GestorPremios.getGestorPremios().obtenerNombresDescripciones(PO);
+            new PremiosConseguidos23(premios);
+        }
+        else{
+            //TODO: ABRIR PANTALLA COMPARTIR RESULTADOS
+        }
+
     }
 }
