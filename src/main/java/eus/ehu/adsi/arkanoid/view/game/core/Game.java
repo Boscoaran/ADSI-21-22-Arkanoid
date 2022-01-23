@@ -103,6 +103,8 @@ public class Game {
 		double ladrillosD = Config.getCountBlocksX(nivel)*Config.getCountBlocksY(nivel);
 		int ladrillos = (int)ladrillosD;
 		int cant = ArkanoidFrontera.getArkanoidFrontera().generarNumeroAleatorio(ladrillos,1)-1;
+		int aparece = ArkanoidFrontera.getArkanoidFrontera().generarNumeroAleatorio(4,0);
+		if (aparece == 0) cant = -1; 
 		boolean suerte = false;
 		bricks.clear();
 		int i = 0;
