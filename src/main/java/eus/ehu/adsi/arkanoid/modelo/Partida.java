@@ -52,4 +52,8 @@ public class Partida {
     	json.put("premios",listaPremios);	//estar� vac�a si no ha habido premios
     	return json;
     }
+
+    public void setFechaFin() {
+        this.fechaFin = new Date();
+    }
 }

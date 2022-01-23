@@ -64,9 +64,13 @@ public class ArkanoidFrontera {
     }
 
     public JSONObject darVentaja(String nombreUsuario) {
-        Usuario u = GestorUsuarios.getGestorUsuarios().buscarUsuarioGestor(nombreUsuario);
-        int random = generarNumeroAleatorio(4, 1);
-        return GestorPartidas.getGestorPartidas().crearVentaja(random, u);
+        Usuario u = GestorUsuarios.getGestorUsuarios().buscarUsuarioGestor(nombreUsuario); //Buscamos al usuario
+        if (u != null) {
+            int random = generarNumeroAleatorio(4, 1); //Se genera un número aleatorio para elegir la ventaja
+            return GestorPartidas.getGestorPartidas().crearVentaja(random, u); //Devolvemos el JSON generado tras crear una ventaja
+        } 
+        return null;
+        
     }
 
     public int generarNumeroAleatorio(int max, int min) {

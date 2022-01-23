@@ -64,7 +64,7 @@ public class Arkanoid extends JFrame implements KeyListener { //No se si se podr
 		this.createBufferStrategy(2);
 		this.setFocusable(true);
 
-		bricks = Game.initializeBricks(bricks, nivel);
+		bricks = Game.initializeBricks(bricks, nivel, -1);
 
 	}
 		
@@ -100,7 +100,7 @@ public class Arkanoid extends JFrame implements KeyListener { //No se si se podr
 				if (game.isTryAgain()) {
 					logger.info("Trying again");
 					game.setTryAgain(false);
-					bricks = Game.initializeBricks(bricks, nivel);
+					bricks = Game.initializeBricks(bricks, nivel, -1);
 					scoreboard.lives = Config.PLAYER_LIVES;
 					scoreboard.score = 0;
 					scoreboard.win = false;
@@ -144,8 +144,8 @@ public class Arkanoid extends JFrame implements KeyListener { //No se si se podr
 			Iterator<Brick> it = bricks.iterator();
 			while (it.hasNext()) {
 				Brick brick = it.next();
-				if (ball != null) Game.testCollision(brick, ball, scoreboard, nivel, this);
-				if (ball2 != null) Game.testCollision(brick, ball2, scoreboard, nivel, this);
+				if (ball != null) Game.testCollision(brick, ball, scoreboard, nivel, this, null);
+				if (ball2 != null) Game.testCollision(brick, ball2, scoreboard, nivel, this, null);
 
 				if (brick.destroyed) {
 					it.remove();
@@ -267,7 +267,7 @@ public class Arkanoid extends JFrame implements KeyListener { //No se si se podr
 		paddle.update(d);
 	}
 
-	public Object getBola(int b) {
+	public Ball getBola(int b) {
 		if (b == 1) return ball;
 		else return ball2;
 	}
@@ -275,6 +275,15 @@ public class Arkanoid extends JFrame implements KeyListener { //No se si se podr
 	public void setBolaNull(int b) {
 		if (b == 1) ball = null;
 		else ball2 = null;
+	}
+
+	public Paddle getPaddle() {
+		return paddle;
+	}
+
+
+	public List<Brick> getBricks() {
+		return bricks;
 	}
 }
 
