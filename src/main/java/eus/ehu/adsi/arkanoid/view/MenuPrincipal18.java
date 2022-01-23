@@ -1,8 +1,8 @@
 package eus.ehu.adsi.arkanoid.view;
 
 import eus.ehu.adsi.arkanoid.controlador.ArkanoidFrontera;
+import eus.ehu.adsi.arkanoid.view.game.Arkanoid;
 import eus.ehu.adsi.arkanoid.view.game.Config;
-import org.json.JSONObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,6 +14,7 @@ public class MenuPrincipal18 extends JFrame {
     private String nombreUsuario;
 
     public MenuPrincipal18(String pNombreUsuario) {
+
 
         this.nombreUsuario = pNombreUsuario;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,7 +29,7 @@ public class MenuPrincipal18 extends JFrame {
 
     private void drawScene() {
 
-        this.getContentPane().setBackground(Config.BACKGROUND_COLOR);
+        this.getContentPane().setBackground(Color.BLACK);
         this.setLayout(new FlowLayout());
 
         JLabel textoNombre = new JLabel(nombreUsuario);
@@ -42,6 +43,7 @@ public class MenuPrincipal18 extends JFrame {
         this.add(botonCambiar());
     }
 
+
     private JButton botonJugar() {
 
         JButton jugar = new JButton("JUGAR");
@@ -50,6 +52,7 @@ public class MenuPrincipal18 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                ArkanoidFrontera.getArkanoidFrontera().cargarAjustes();
                 new SeleccionarNivel19();
             }
         });
@@ -64,7 +67,8 @@ public class MenuPrincipal18 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                System.out.println("Ranking, añadir fig");
+                dispose();
+                new Ranking22(nombreUsuario);
             }
         });
         return ranking;
@@ -78,7 +82,8 @@ public class MenuPrincipal18 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                System.out.println("Ajustes, añadir fig");
+                dispose();
+                new Personalizacion21(nombreUsuario);
             }
         });
         return ajustes;
@@ -92,7 +97,8 @@ public class MenuPrincipal18 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                System.out.println("Cerrar sesión, añadir fig");
+                dispose();
+                new Inicio16();
             }
         });
         return cerrar;
@@ -106,7 +112,8 @@ public class MenuPrincipal18 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                new CambiarContraseña20(nombreUsuario);
+                dispose();
+                new CambiarContrasena20(nombreUsuario);
             }
         });
         return cambiar;

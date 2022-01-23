@@ -9,8 +9,8 @@ public abstract class Config {
 
 	public static final double BALL_RADIUS = 10.0;
 	public static final double BALL_VELOCITY1 = 0.2;
-	public static final double BALL_VELOCITY2 = 0.3;
-	public static final double BALL_VELOCITY3 = 0.4;
+	public static final double BALL_VELOCITY2 = 0.27;
+	public static final double BALL_VELOCITY3 = 0.33;
 
 	public static final double PADDLE_WIDTH = 60.0;
 	public static final double PADDLE_HEIGHT = 20.0;
@@ -34,13 +34,55 @@ public abstract class Config {
 	public static final String FONT = "Courier New";
 	public static final Color FONT_COLOR = Color.lightGray;
 
-	public static final Color BACKGROUND_COLOR = Color.black;
-	public static final Color BALL_COLOR = Color.orange;
-	public static final Color PADDLE_COLOR = Color.red;
-	public static final Color BRICK_COLOR = Color.blue;
+	public static Color BACKGROUND_COLOR;
+	public static Color BALL_COLOR;
+	public static Color PADDLE_COLOR;
+	public static Color BRICK_COLOR;
 
-  public static final Color BRICK_COLOR_SUERTE = Color.yellow;
+	public static Boolean SONIDO;
 
+
+	public static final Color BRICK_COLOR_SUERTE = Color.yellow;
+
+	public static void setSonido(Boolean activar){
+		SONIDO = activar;
+	}
+
+	public static Boolean getSonido(){
+		return SONIDO;
+	}
+
+	public static void setBackgroundColor(Color color){
+		BACKGROUND_COLOR = color;
+	}
+
+	public static Color getBackGroundColor(){
+		return BACKGROUND_COLOR;
+	}
+
+	public static void setBolaColor(Color color){
+		BALL_COLOR = color;
+	}
+
+	public static Color getBolaColor(){
+		return BALL_COLOR;
+	}
+
+	public static void setPaddleColor(Color color){
+		PADDLE_COLOR = color;
+	}
+
+	public static Color getPaddleColor(){
+		return PADDLE_COLOR;
+	}
+
+	public static void setLadrilloColor(Color color){
+		BRICK_COLOR = color;
+	}
+
+	public static Color getLadrilloColor(){
+		return BRICK_COLOR;
+	}
 
 	public static double getBallVelocity(int nivel) {
 		if (nivel==1)

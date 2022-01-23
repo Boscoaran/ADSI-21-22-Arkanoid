@@ -22,7 +22,28 @@ public class GestorPremios {
         return mGestorPremios;
     }
 
-    public void generarPremios(){   //TODO: PONER LOS DESBLOQUEOS CORRESPONDIENTES EN CADA PREMIO
+    public void generarPremios(){
+        listaPremios.add(new Premio("Fácil I", "Ganar 1 partida en el nivel de dificultad fácil"));
+        listaPremios.add(new Premio("Fácil II", "Ganar 5 partida en el nivel de dificultad fácil"));
+        listaPremios.add(new Premio("Fácil III", "Ganar 10 partida en el nivel de dificultad fácil"));
+        listaPremios.add(new Premio("Medio I", "Ganar 1 partida en el nivel de dificultad Medio"));
+        listaPremios.add(new Premio("Medio II", "Ganar 5 partida en el nivel de dificultad Medio"));
+        listaPremios.add(new Premio("Medio III", "Ganar 10 partida en el nivel de dificultad Medio"));
+        listaPremios.add(new Premio("Difícil I", "Ganar 1 partida en el nivel de dificultad Difícil"));
+        listaPremios.add(new Premio("Difícil II", "Ganar 5 partida en el nivel de dificultad Difícil"));
+        listaPremios.add(new Premio("Difícil III", "Ganar 10 partida en el nivel de dificultad Difícil"));
+        listaPremios.add(new Premio("En racha I", "Ganar 2 partidas seguidas (en cualquier dificultad)"));
+        listaPremios.add(new Premio("En racha II", "Ganar 5 partidas seguidas (en cualquier dificultad)"));
+        listaPremios.add(new Premio("En racha III", "Ganar 10 partidas seguidas (en cualquier dificultad)"));
+        listaPremios.add(new Premio("Demoledor I", "Romper 100 ladrillos (en total)"));
+        listaPremios.add(new Premio("Demoledor II", "Romper 500 ladrillos (en total)"));
+        listaPremios.add(new Premio("Demoledor III", "Romper 1000 ladrillos (en total)"));
+        listaPremios.add(new Premio("Suertudo I", "Romper 1 ladrillo especial (en total)"));
+        listaPremios.add(new Premio("Suertudo II", "Romper 5 ladrillo especiales (en total)"));
+        listaPremios.add(new Premio("Suertudo III", "Romper 10 ladrillo especiales (en total)"));
+    }
+
+    public void generarPremiosBD(){ //TODO
         listaPremios.add(new Premio("Fácil I", "Ganar 1 partida en el nivel de dificultad fácil"));
         listaPremios.add(new Premio("Fácil II", "Ganar 5 partida en el nivel de dificultad fácil"));
         listaPremios.add(new Premio("Fácil III", "Ganar 10 partida en el nivel de dificultad fácil"));
@@ -102,15 +123,14 @@ public class GestorPremios {
     }
 
     public List<Premio> otorgarPremios(Usuario u, List<Premio> premios){
-        return u.otorgarPremios(premios);
+        return u.otorgarPremiosBD(premios);
     }
 
     public void annadirPremios(Partida p, List<Premio> premios){
         p.annadirPremios(premios);
     }
 
-    public JSONObject obtenerNombresDescripciones(List<Premio> premios){
-        JSONObject joLista = new JSONObject();
+    public JSONObject obtenerNombresDescripciones(List<Premio> premios, JSONObject joLista){
         List<JSONObject> listaPremios = new ArrayList<JSONObject>();
         Premio PActual;
         Iterator<Premio> itr = premios.iterator();

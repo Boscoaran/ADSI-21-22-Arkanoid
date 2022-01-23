@@ -32,7 +32,7 @@ import java.util.List;
 public class Ranking22 {
 
 	private JFrame frame;
-    private JPanel panelTitulo;
+	private JPanel panelTitulo;
 	private JPanel panelMedio;
 	private JLabel lblGlobal;
 	private JLabel lblNombre;
@@ -48,26 +48,26 @@ public class Ranking22 {
 	private JButton btnVolver;
 	private JLabel lblJugador;
 	private JPanel panelSeparador;
-    private String jugador;
-    private Font impact = AddFont.createFont();
+	private String jugador;
+	private Font impact = AddFont.createFont();
 	private GridBagConstraints gbc_panelGlobal = new GridBagConstraints();
 	private GridBagConstraints gbc_panelIndividual = new GridBagConstraints();
 	private GridBagConstraints gbc_panelSeparador = new GridBagConstraints();
 
-	
+
 	public Ranking22(String nombre) {
 		jugador = nombre;
-        initialize();
+		initialize();
 	}
 
 	private void initialize() {
 		frame = new JFrame();
-        frame.setSize(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
-        frame.setTitle("Ranking");
-        frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
+		frame.setTitle("Ranking");
+		frame.setResizable(false);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-        frame.setLocationRelativeTo(null);
+		frame.setLocationRelativeTo(null);
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
@@ -98,12 +98,12 @@ public class Ranking22 {
 		gbc_panelVolver.gridx = 0;
 		gbc_panelVolver.gridy = 3;
 		frame.getContentPane().add(getPanelVolver(), gbc_panelVolver);
-        frame.getContentPane().setBackground(Color.BLACK);
-        frame.setVisible(true);
+		frame.getContentPane().setBackground(Color.BLACK);
+		frame.setVisible(true);
 	}
 
-    //////////////////////////TITULO////////////////////////////////
-    private JPanel getPanelTitulo() {
+	//////////////////////////TITULO////////////////////////////////
+	private JPanel getPanelTitulo() {
 		if (panelTitulo == null) {
 			panelTitulo = new JPanel();
 			panelTitulo.setBackground(Color.BLACK);
@@ -112,17 +112,17 @@ public class Ranking22 {
 		return panelTitulo;
 	}
 
-    private JLabel getLblRanking() {
+	private JLabel getLblRanking() {
 		if (lblRanking == null) {
 			lblRanking = new JLabel("Ranking");
 			lblRanking.setForeground(Color.WHITE);
-            lblRanking.setBackground(Color.BLACK);
+			lblRanking.setBackground(Color.BLACK);
 			lblRanking.setFont(impact.deriveFont(60.0f));
-            }
+		}
 		return lblRanking;
 	}
 
-    ///////////////////////////////////PANEL MEDIO/////////////////////
+	///////////////////////////////////PANEL MEDIO/////////////////////
 	private JPanel getPanelMedio() {
 		if (panelMedio == null) {
 			panelMedio = new JPanel();
@@ -150,7 +150,7 @@ public class Ranking22 {
 			gbc_comboBoxNiveles.gridy = 1;
 			panelMedio.add(getComboBoxNiveles(), gbc_comboBoxNiveles);
 			GridBagConstraints gbc_lblIndividual = new GridBagConstraints();
-            gbc_lblIndividual.insets = new Insets(0, 0, 0, 50);
+			gbc_lblIndividual.insets = new Insets(0, 0, 0, 50);
 			gbc_lblIndividual.gridx = 2;
 			gbc_lblIndividual.gridy = 1;
 			panelMedio.add(getLblIndividual(), gbc_lblIndividual);
@@ -189,8 +189,8 @@ public class Ranking22 {
 		if (comboBoxNiveles == null) {
 			comboBoxNiveles = new JComboBox();
 			comboBoxNiveles.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Fácil", "Medio", "Difícil"}));
-            comboBoxNiveles.setFont(impact.deriveFont(30.0f));
-            comboBoxNiveles.setForeground(Color.BLACK);
+			comboBoxNiveles.setFont(impact.deriveFont(30.0f));
+			comboBoxNiveles.setForeground(Color.BLACK);
 			comboBoxNiveles.addActionListener(new ActionListener() {
 
 				@Override
@@ -204,13 +204,13 @@ public class Ranking22 {
 					panelRankings.revalidate();
 					panelRankings.repaint();
 				}
-				
+
 			});
 		}
 		return comboBoxNiveles;
 	}
 
-    /////////////////////////////RANKINGS//////////////////////////////////////////////////
+	/////////////////////////////RANKINGS//////////////////////////////////////////////////
 	private JPanel getPanelRankings() {
 		if (panelRankings == null) {
 			panelRankings = new JPanel();
@@ -237,7 +237,7 @@ public class Ranking22 {
 			gbc_panelIndividual.gridx = 3;
 			gbc_panelIndividual.gridy = 0;
 			panelRankings.add(getPanelIndividual(), gbc_panelIndividual);
-            panelRankings.setBackground(Color.BLACK);
+			panelRankings.setBackground(Color.BLACK);
 		}
 		return panelRankings;
 	}
@@ -246,11 +246,11 @@ public class Ranking22 {
 		panelGlobal = new JPanel();
 		panelGlobal.setBackground(Color.BLACK);
 		panelGlobal.setLayout(new GridLayout(10, 0, 0, 0));
-        int nPartidas = ArkanoidFrontera.getArkanoidFrontera().nPartidas(null, comboBoxNiveles.getSelectedIndex());
-        for (int i=1; i<=nPartidas &&  i<10; i++){
+		int nPartidas = ArkanoidFrontera.getArkanoidFrontera().nPartidas(null, comboBoxNiveles.getSelectedIndex());
+		for (int i=1; i<=nPartidas &&  i<10; i++){
 			JSONObject jugadorPuntuacion = ArkanoidFrontera.getArkanoidFrontera().jugadorPos(i, comboBoxNiveles.getSelectedIndex(), null);
-		    panelGlobal.add(getLblJugador(jugadorPuntuacion.getString("nombre"), jugadorPuntuacion.getInt("puntos")));
-        }
+			panelGlobal.add(getLblJugador(jugadorPuntuacion.getString("nombre"), jugadorPuntuacion.getInt("puntos")));
+		}
 		return panelGlobal;
 	}
 
@@ -258,11 +258,11 @@ public class Ranking22 {
 		panelGlobalUpdate = new JPanel();
 		panelGlobalUpdate.setBackground(Color.BLACK);
 		panelGlobalUpdate.setLayout(new GridLayout(10, 0, 0, 0));
-        int nPartidas = ArkanoidFrontera.getArkanoidFrontera().nPartidas(null, comboBoxNiveles.getSelectedIndex());
-        for (int i=1; i<=nPartidas &&  i<10; i++){
+		int nPartidas = ArkanoidFrontera.getArkanoidFrontera().nPartidas(null, comboBoxNiveles.getSelectedIndex());
+		for (int i=1; i<=nPartidas &&  i<10; i++){
 			JSONObject jugadorPuntuacion = ArkanoidFrontera.getArkanoidFrontera().jugadorPos(i, comboBoxNiveles.getSelectedIndex(), null);
-		    panelGlobalUpdate.add(getLblJugador(jugadorPuntuacion.getString("nombre"), jugadorPuntuacion.getInt("puntos")));
-        }
+			panelGlobalUpdate.add(getLblJugador(jugadorPuntuacion.getString("nombre"), jugadorPuntuacion.getInt("puntos")));
+		}
 		return panelGlobalUpdate;
 	}
 
@@ -271,10 +271,10 @@ public class Ranking22 {
 		panelIndividual.setBackground(Color.BLACK);
 		panelIndividual.setLayout(new GridLayout(10, 0, 0, 0));
 		int nPartidas = ArkanoidFrontera.getArkanoidFrontera().nPartidas(jugador, comboBoxNiveles.getSelectedIndex());
-        for (int i=1; i<=nPartidas && i<10; i++){
+		for (int i=1; i<=nPartidas && i<10; i++){
 			JSONObject jugadorPuntuacion = ArkanoidFrontera.getArkanoidFrontera().jugadorPos(i, comboBoxNiveles.getSelectedIndex(), jugador);
-		    panelIndividual.add(getLblJugador(jugadorPuntuacion.getString("nombre"), jugadorPuntuacion.getInt("puntos")));
-        }
+			panelIndividual.add(getLblJugador(jugadorPuntuacion.getString("nombre"), jugadorPuntuacion.getInt("puntos")));
+		}
 		return panelIndividual;
 	}
 
@@ -283,33 +283,32 @@ public class Ranking22 {
 		panelIndividualUpdate.setBackground(Color.BLACK);
 		panelIndividualUpdate.setLayout(new GridLayout(10, 0, 0, 0));
 		int nPartidas = ArkanoidFrontera.getArkanoidFrontera().nPartidas(jugador, comboBoxNiveles.getSelectedIndex());
-        for (int i=1; i<=nPartidas && i<10; i++){
+		for (int i=1; i<=nPartidas && i<10; i++){
 			JSONObject jugadorPuntuacion = ArkanoidFrontera.getArkanoidFrontera().jugadorPos(i, comboBoxNiveles.getSelectedIndex(), jugador);
-		    panelIndividualUpdate.add(getLblJugador(jugadorPuntuacion.getString("nombre"), jugadorPuntuacion.getInt("puntos")));
-        }
+			panelIndividualUpdate.add(getLblJugador(jugadorPuntuacion.getString("nombre"), jugadorPuntuacion.getInt("puntos")));
+		}
 		return panelIndividualUpdate;
 	}
 
-    private JLabel getLblJugador(String nombre, Integer puntos) {
-            String p = ".";
-			String puntosStr = Integer.toString(puntos);
-            String separacion = p.repeat(60 - nombre.length()-puntosStr.length()*(puntosStr.length()));
-            lblJugador = new JLabel(nombre + separacion + puntos);
-			lblJugador.setForeground(Color.WHITE);
-            lblJugador.setFont(impact.deriveFont(20.0f));
-			System.out.println(lblJugador.getText());
+	private JLabel getLblJugador(String nombre, Integer puntos) {
+		String p = ".";
+		String puntosStr = Integer.toString(puntos);
+		String separacion = p.repeat(60 - nombre.length()-puntosStr.length()*(puntosStr.length()));
+		lblJugador = new JLabel(nombre + separacion + puntos);
+		lblJugador.setForeground(Color.WHITE);
+		lblJugador.setFont(impact.deriveFont(20.0f));
 		return lblJugador;
 	}
 
 	private JPanel getPanelSeparador() {
 		if (panelSeparador == null) {
 			panelSeparador = new JPanel();
-            panelSeparador.setBackground(Color.WHITE);
+			panelSeparador.setBackground(Color.WHITE);
 		}
 		return panelSeparador;
 	}
-	
-    ///////////////////////////////VOLVER//////////////////////////////
+
+	///////////////////////////////VOLVER//////////////////////////////
 	private JPanel getPanelVolver() {
 		if (panelVolver == null) {
 			panelVolver = new JPanel();
@@ -322,15 +321,16 @@ public class Ranking22 {
 	private JButton getBtnVolver() {
 		if (btnVolver == null) {
 			btnVolver = new JButton("Volver");
-            btnVolver.setBorderPainted(false);
-            btnVolver.setFocusPainted(false);
-            btnVolver.setContentAreaFilled(false);
-            btnVolver.setForeground(Color.WHITE);
-            btnVolver.setFont(impact.deriveFont(30.0f));
-            btnVolver.addMouseListener(new MouseAdapter() {
+			btnVolver.setBorderPainted(false);
+			btnVolver.setFocusPainted(false);
+			btnVolver.setContentAreaFilled(false);
+			btnVolver.setForeground(Color.WHITE);
+			btnVolver.setFont(impact.deriveFont(30.0f));
+			btnVolver.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					frame.dispose();
+					new MenuPrincipal18(jugador);
 				}
 				@Override
 				public void mouseEntered(MouseEvent e){
