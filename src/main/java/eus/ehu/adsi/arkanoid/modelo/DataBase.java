@@ -331,7 +331,7 @@ public class DataBase {
         Connection con = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
+            con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", " ","NKihfwtwiR");
         } catch (ClassNotFoundException e) {
             System.out.println("Error al registrar el dirver de MySQL:" + e);
             return -1;
@@ -346,7 +346,7 @@ public class DataBase {
         return maxPunt;
     }
 
-    public void annadirDesbloquable(String nombreUsuario, String nTabla, String vColor) throws Exception {
+    public void annadirDesbloquable(String nombreUsuario, String nTabla) throws Exception {
         Connection con = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -355,6 +355,6 @@ public class DataBase {
             System.out.println("Error al registrar el dirver de MySQL:" + e);
         }
         Statement s = con.createStatement();
-        s.executeUpdate("UPDATE usuario SET TRUE WHERE nombreUsuario = \""+nombreUsuario+"\" AND "+nTabla+"\" = \""+vColor+"");
+        s.executeUpdate("UPDATE usuario SET\""+nTabla+"\"=TRUE WHERE nombreUsuario =\""+nombreUsuario+"\"");
     }
 }

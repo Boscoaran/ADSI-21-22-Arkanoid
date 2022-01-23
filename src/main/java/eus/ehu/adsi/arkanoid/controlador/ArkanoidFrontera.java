@@ -52,7 +52,9 @@ public class ArkanoidFrontera {
     private String correoArkanoid = "arkanoidrecovery@gmail.com";
     private String contrasenaArkanoid = "ARKpassword";
 
-    private ArkanoidFrontera() {}
+    private ArkanoidFrontera() {
+        GestorPremios.getGestorPremios().generarPremiosBD();
+    }
 
     public static ArkanoidFrontera getArkanoidFrontera() {
         if (mArkanoidFrontera == null) mArkanoidFrontera = new ArkanoidFrontera();

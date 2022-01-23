@@ -100,7 +100,7 @@ public class Usuario {
             if (!listaPremios.contains(PActual)){
                 POtorgados.add(PActual);
                 try {
-                    DataBase.getmDataBase().annadirDesbloquable(nombreUsuario,PActual.getnTabla(),PActual.getvColor());
+                    DataBase.getmDataBase().annadirDesbloquable(nombreUsuario,PActual.getnTabla());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
