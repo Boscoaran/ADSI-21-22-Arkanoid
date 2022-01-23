@@ -104,7 +104,7 @@ public class ArkanoidFrontera {
         JSONObject resultado = new JSONObject();
 
         //Buscar el usuario por su nombre de usuario
-        Usuario U = GestorUsuarios.getGestorUsuarios().buscarUsuario(nombreUsuario, contrasena);
+        Usuario U = GestorUsuarios.getGestorUsuarios().buscarUsuario(nombreUsuario);
 
         //Comprobar si el usuario existe
         if (U != null) {
@@ -354,7 +354,7 @@ public class ArkanoidFrontera {
         //Comprobar que todos los campos estén rellenos
         if (!(nombreUsuario.equals("") || correo.equals("") || contrasena1.equals("") || contrasena2.equals(""))) {
             //Buscar el usuario por su nombre de usuario
-            Usuario U = GestorUsuarios.getGestorUsuarios().buscarUsuarioGestor(nombreUsuario);
+            Usuario U = GestorUsuarios.getGestorUsuarios().buscarUsuario(nombreUsuario);
 
             //Comprobar que el usuario no exista
             if (U == null) {
@@ -437,7 +437,7 @@ public class ArkanoidFrontera {
         //Comprobar que todos los campos estén rellenos
         if (!(nombreUsuario.equals("") || cAnterior.equals("") || cNueva1.equals("") || cNueva2.equals(""))) {
             //Buscar el usuario por su nombre de usuario
-            Usuario U = GestorUsuarios.getGestorUsuarios().buscarUsuarioGestor(nombreUsuario);
+            Usuario U = GestorUsuarios.getGestorUsuarios().buscarUsuario(nombreUsuario);
 
             //Comprobar si la contrasena anterior es correcta
             if (GestorUsuarios.getGestorUsuarios().esContrasena(U, cAnterior)) {
@@ -547,15 +547,15 @@ public class ArkanoidFrontera {
     	FraseMensaje f2= new FraseMensaje("La maxima puntuacion de pUsuario es pMaxPuntuacion. ");
     	FraseMensaje f3= new FraseMensaje("");	//luego se crear� una frase por cada premio conseguido en la partida
     	
-    	Usuario usuario=GestorUsuarios.getGestorUsuarios().buscarUsuarioGestor(pNombreUsuario);
-    	int maxPunt=GestorPartidas.getGestorPartidas().obtenerMaxPuntuacionHistorica(usuario);
-    	Partida partida=GestorPartidas.getGestorPartidas().buscarPartidaActual(usuario);	//revisar si esta parte se puede eliminar
-    	//igual a estas alturas ya hay fechaFin en la partida, si no la hay, habr�a que ponerla justo aqu�
-    
-    	JSONObject datosPartida=GestorPartidas.getGestorPartidas().obtenerDatosPartida(partida,maxPunt);
-    	f1.asignarValoresAParametros(1,datosPartida);
-    	f2.asignarValoresAParametros(2,datosPartida);
-    	f3.asignarValoresAParametros(3,datosPartida);	//si no se ha conseguido ning�n premio, no se har� nada
+//    	Usuario usuario=GestorUsuarios.getGestorUsuarios().buscarUsuarioGestor(pNombreUsuario);
+//    	int maxPunt=GestorPartidas.getGestorPartidas().obtenerMaxPuntuacionHistorica(usuario);
+//    	Partida partida=GestorPartidas.getGestorPartidas().buscarPartidaActual(usuario);	//revisar si esta parte se puede eliminar
+//    	//igual a estas alturas ya hay fechaFin en la partida, si no la hay, habr�a que ponerla justo aqu�
+//
+//    	JSONObject datosPartida=GestorPartidas.getGestorPartidas().obtenerDatosPartida(partida,maxPunt);
+//    	f1.asignarValoresAParametros(1,datosPartida);
+//    	f2.asignarValoresAParametros(2,datosPartida);
+//    	f3.asignarValoresAParametros(3,datosPartida);	//si no se ha conseguido ning�n premio, no se har� nada
     	
     	//pasar mensaje a string
     	String mensaje=f1.getFrase()+f2.getFrase()+f3.getFrase();
@@ -676,5 +676,10 @@ public class ArkanoidFrontera {
      */
     public void borrarUsuarios() {
         GestorUsuarios.getGestorUsuarios().borrarUsuarios();
+        try {
+            DataBase.getmDataBase().borrarUsuarios();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 }

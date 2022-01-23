@@ -287,28 +287,79 @@ public class DataBase {
         return false;
     }
 
-    public JSONObject buscarUsuario(String nombreUsuario, String contra) throws SQLException {
-        System.out.println(nombreUsuario);
-        System.out.println(contra);
+    public void registrarUsuario(String nombreUsuario, String correo, String contrasena1) throws SQLException {
+        Connection con = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error al registrar el driver de MySQL:" + e);
+        }
+        ResultSet rs;
+        Statement s = con.createStatement();
+        s.executeUpdate("INSERT INTO usuario(nombreUsuario, correo, contraseña) VALUES (\""+nombreUsuario+"\",\""+correo+"\",\""+contrasena1+"\")");
+        con.close();
+        return;
+    }
+
+    public void borrarUsuarios() throws SQLException {
+        Connection con = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error al registrar el driver de MySQL:" + e);
+        }
+        ResultSet rs;
+        Statement s = con.createStatement();
+        s.executeUpdate("DELETE FROM usuario");
+        con.close();
+        return;
+    }
+
+    public JSONObject buscarUsuario(String nombreUsuario) throws SQLException {
+
         JSONObject j = new JSONObject();
         Connection con = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
 		} catch (ClassNotFoundException e) {
-			System.out.println("Error al registrar el dirver de MySQL:" + e);
+			System.out.println("Error al registrar el driver de MySQL:" + e);
 		}
         ResultSet rs;
         Statement s = con.createStatement();
-        rs = s.executeQuery("SELECT * FROM usuario WHERE nombreUsuario = \""+nombreUsuario+"\" AND contraseña = \"" + contra + "\"");
+        rs = s.executeQuery("SELECT * FROM usuario WHERE nombreUsuario = \""+nombreUsuario+"\"");
         boolean b = rs.next();
         if (b) {
-            System.out.println("hola");
             j.put("nombreUsuario", rs.getString(1));
             j.put("correo", rs.getString(2));
             j.put("contra", rs.getString(3));
         }
+        con.close();
+        return j;
+    }
 
+    public JSONObject buscarUsuarioCorreo(String correo) throws SQLException {
+
+        JSONObject j = new JSONObject();
+        Connection con = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error al registrar el driver de MySQL:" + e);
+        }
+        ResultSet rs;
+        Statement s = con.createStatement();
+        rs = s.executeQuery("SELECT * FROM usuario WHERE correo = \""+correo+"\"");
+        boolean b = rs.next();
+        if (b) {
+            j.put("nombreUsuario", rs.getString(1));
+            j.put("correo", rs.getString(2));
+            j.put("contra", rs.getString(3));
+        }
+        con.close();
         return j;
     }
     

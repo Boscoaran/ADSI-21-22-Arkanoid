@@ -42,12 +42,12 @@ public class RecuperarContrasena17c extends JFrame {
         textoCorreo.setForeground(Config.FONT_COLOR);
         textoCorreo.setFont(impact.deriveFont(20.0f));
         JPanel titulo = new JPanel();
-        titulo.setBackground(Config.BACKGROUND_COLOR);
+        titulo.setBackground(Color.BLACK);
         titulo.add(textoCorreo);
         this.add(titulo, BorderLayout.PAGE_START);
 
         JPanel campos = new JPanel();
-        campos.setBackground(Config.BACKGROUND_COLOR);
+        campos.setBackground(Color.BLACK);
         campos.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
@@ -88,7 +88,7 @@ public class RecuperarContrasena17c extends JFrame {
         textoVolver.setForeground(Config.FONT_COLOR);
         textoVolver.setFont(impact.deriveFont(20.0f));
         JPanel enviar = new JPanel();
-        enviar.setBackground(Config.BACKGROUND_COLOR);
+        enviar.setBackground(Color.BLACK);
         enviar.add(textoVolver);
         enviar.add(botonVolver());
         c.gridx = 0;
@@ -99,7 +99,7 @@ public class RecuperarContrasena17c extends JFrame {
         this.add(campos, BorderLayout.CENTER);
 
         JPanel botones = new JPanel();
-        botones.setBackground(Config.BACKGROUND_COLOR);
+        botones.setBackground(Color.BLACK);
         botones.add(botonAceptar());
         botones.add(botonCancelar());
         this.add(botones, BorderLayout.PAGE_END);

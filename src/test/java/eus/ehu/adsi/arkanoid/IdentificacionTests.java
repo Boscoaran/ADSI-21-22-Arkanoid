@@ -529,7 +529,7 @@ public class IdentificacionTests {
 	//Método esContrasena(Usuario U, String contrasena)
 
 	@Test
-	public void GUesContrasenaCorrecta() {
+	public void esContrasenaCorrectaGU() {
 		//Crear un usuario de prueba
 		Usuario u = new Usuario("usuario", "correo@ehu.eus", "contrasena");
 		//Añadir el usuario a la lista
@@ -539,7 +539,7 @@ public class IdentificacionTests {
 	}
 
 	@Test
-	public void GUesContrasenaIncorrecta() {
+	public void esContrasenaIncorrectaGU() {
 		//Crear un usuario de prueba
 		Usuario u = new Usuario("usuario", "correo@ehu.eus", "contrasena");
 		//Añadir el usuario a la lista
