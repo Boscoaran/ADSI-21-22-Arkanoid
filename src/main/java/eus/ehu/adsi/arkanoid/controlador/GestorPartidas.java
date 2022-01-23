@@ -26,8 +26,8 @@ public class GestorPartidas {
 
     public Partida buscarPartidaActual(Usuario u) {
         for (Partida p : lPartidas) {
-            if (p.esUsuario(u)) 
-                if (p.noFechaFin()) {
+            if (p.esUsuario(u)) //Si se trata del usuario que está jugando ahora
+                if (p.noFechaFin()) { //Si la partida no tiene fecha de fin, es la actual
                     return p;
                 }
         }
@@ -35,10 +35,14 @@ public class GestorPartidas {
     }
 
     public JSONObject crearVentaja(int random, Usuario u) {
-        Partida p = buscarPartidaActual(u);
-        Ventaja v = CreadorVentaja.getCreadorVentaja().crearVentaja(random);
-        p.agregarAListaVentaja(v);
-        return v.darVentaja();
+        Partida p = buscarPartidaActual(u); //Bsucamos la partida actual
+        if (p != null) {
+            Ventaja v = CreadorVentaja.getCreadorVentaja().crearVentaja(random); //Se aplica el patrón Factory en caso de querer añadir nuevas funcionalidades
+            p.agregarAListaVentaja(v); //Se agrega a la lista de ventajas de partida actual
+            return v.darVentaja(); //Se ejecuta la funcionalidad de la ventaja
+        }
+        return null;
+        
     }
 
     public void anadir(Partida p) {
