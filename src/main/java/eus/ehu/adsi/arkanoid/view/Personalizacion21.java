@@ -184,7 +184,7 @@ public class Personalizacion21 {
           	}
 		return panelCentro;
 	}
-	
+	//BTN ACEPTAR permite guardar los datos seleccionados por el usuario
 	private JButton getBtnAceptar() {
 		if (btnAceptar == null) {
 			btnAceptar = new JButton("Aceptar");
@@ -218,7 +218,7 @@ public class Personalizacion21 {
 		}
 		return btnAceptar;
 	}
-
+	//BTN CANCELAR permite cancelar los cambios hechos y devuelve al menú principal
     private JButton getBtnCancelar() {
 		if (btnCancelar == null) {
 			btnCancelar = new JButton("Cancelar");
@@ -337,7 +337,7 @@ public class Personalizacion21 {
 		}
 		return comboBoxLadrillo;
 	}
-
+	//Añadimos los colores seleccionados al desplegable
 	private void añadirColores(JComboBox comboBox, JSONObject colores){
 		Iterator <String> keys = colores.keys();
 		while(keys.hasNext()){
@@ -364,7 +364,7 @@ public class Personalizacion21 {
 		}
 		
 	}
-
+	//Si el sonido esta pulsado se muestra su correspondiente imagen y activa la cancion
     private JButton getBtnSonido(int s) {
 		if (btnSonido == null) {
 			
