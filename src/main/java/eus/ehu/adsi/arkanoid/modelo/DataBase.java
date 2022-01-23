@@ -393,7 +393,7 @@ public class DataBase {
         Statement s = con.createStatement();
         int v = 0;
         if (victoria) v = 1;
-        s.execute("INSERT INTO Partida VALUES (\"" + nombre + "\", \""+ "null" + "\", " + lvl + ", " + 0 +  ", \""+ "null" + "\", \""+ fecha + "\", " + puntuacion + ", " + ladrillosNormalesDestruidos + ", " + ladrillosEspecialesDestruidos + ", " + v + ", " + numVidas + ")");       
+        s.execute("INSERT INTO Partida VALUES (\"" + nombre + "\", \""+ "null" + "\", " + lvl + ", , \""+ "null" + "\", \""+ fecha + "\", " + puntuacion + ", " + ladrillosNormalesDestruidos + ", " + ladrillosEspecialesDestruidos + ", " + v + ", " + numVidas + ")");       
     }
     
     public int getMaxPunt(String nombre) throws SQLException {
@@ -408,7 +408,7 @@ public class DataBase {
 		}
         Statement s = con.createStatement();
         ResultSet rs;
-        rs = s.executeQuery("SELECT MAX(puntuacion) FROM Partida WHERE nombreUsuario=\"" + nombre +"\"");
+        rs = s.executeQuery("SELECT MAX(Puntuacion) FROM Partida WHERE nombreUsuario=\"" + nombre +"\"");
         boolean b = rs.next();
         if (b) {
             maxPunt=rs.getInt(1);
