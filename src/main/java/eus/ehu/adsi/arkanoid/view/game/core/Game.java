@@ -49,7 +49,7 @@ public class Game {
 			mBall.velocityX = Config.getBallVelocity(nivel);
 	}
 	
-	public static void testCollision(Brick mBrick, Ball mBall, ScoreBoard scoreboard, int nivel, Arkanoid a, String pNombre) {
+	public static void testCollision(Brick mBrick, Ball mBall, ScoreBoard scoreboard, int nivel, Arkanoid a, JSONObject pr, String pNombre) {
 		if (!Game.isIntersecting(mBrick, mBall))
 			return;
 
@@ -58,7 +58,9 @@ public class Game {
 		String descrip = null;
 
 		if (mBrick.getSuerte()) {
-			JSONObject j = ArkanoidFrontera.getArkanoidFrontera().darVentaja(pNombre); //TO DO: Gestión de usuarios
+			JSONObject j = null;
+			if (pr == null) j = ArkanoidFrontera.getArkanoidFrontera().darVentaja(pNombre); //TO DO: Gestión de usuarios
+			else j = pr;
 			descrip = j.getString("descrip");
 			
 			if (!j.isNull("vidas")) {
@@ -99,10 +101,20 @@ public class Game {
 				&& mA.bottom() >= mB.top() && mA.top() <= mB.bottom();
 	}
 	
-	public static List<Brick> initializeBricks(List<Brick> bricks, int nivel) {
+	public static List<Brick> initializeBricks(List<Brick> bricks, int nivel, int pr) {
 		double ladrillosD = Config.getCountBlocksX(nivel)*Config.getCountBlocksY(nivel);
 		int ladrillos = (int)ladrillosD;
+		int aparece = 0;
+		if (pr == 1) {
+			aparece = 0;
+		} else if (pr == 2) {
+			aparece = 1;
+		} else {
+			aparece = ArkanoidFrontera.getArkanoidFrontera().generarNumeroAleatorio(4,0);
+		}
 		int cant = ArkanoidFrontera.getArkanoidFrontera().generarNumeroAleatorio(ladrillos,1)-1;
+		
+		if (aparece == 0) cant = -1; 
 		boolean suerte = false;
 		bricks.clear();
 		int i = 0;

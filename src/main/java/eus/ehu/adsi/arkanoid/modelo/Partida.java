@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONObject;
-
 public class Partida {
     private int puntuacion;
     private int ladrillosNormalesDestruidos;
@@ -71,4 +69,8 @@ public class Partida {
             System.err.println(e);
         }
 	}
+    
+    public void setFechaFin() {
+        this.fechaFin = LocalDateTime.now();
+    }
 }

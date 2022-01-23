@@ -48,4 +48,8 @@ public class Paddle extends Rectangle {
 		g.fillRect((int) (left()), (int) (top()), (int) sizeX, (int) sizeY);
 	}
 
+	public double size() {
+		return sizeX;
+	}
+
 }
