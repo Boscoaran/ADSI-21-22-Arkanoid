@@ -547,15 +547,15 @@ public class ArkanoidFrontera {
     	FraseMensaje f2= new FraseMensaje("La maxima puntuacion de pUsuario es pMaxPuntuacion. ");
     	FraseMensaje f3= new FraseMensaje("");	//luego se crear� una frase por cada premio conseguido en la partida
     	
-//    	Usuario usuario=GestorUsuarios.getGestorUsuarios().buscarUsuarioGestor(pNombreUsuario);
-//    	int maxPunt=GestorPartidas.getGestorPartidas().obtenerMaxPuntuacionHistorica(usuario);
-//    	Partida partida=GestorPartidas.getGestorPartidas().buscarPartidaActual(usuario);	//revisar si esta parte se puede eliminar
-//    	//igual a estas alturas ya hay fechaFin en la partida, si no la hay, habr�a que ponerla justo aqu�
-//
-//    	JSONObject datosPartida=GestorPartidas.getGestorPartidas().obtenerDatosPartida(partida,maxPunt);
-//    	f1.asignarValoresAParametros(1,datosPartida);
-//    	f2.asignarValoresAParametros(2,datosPartida);
-//    	f3.asignarValoresAParametros(3,datosPartida);	//si no se ha conseguido ning�n premio, no se har� nada
+    	Usuario usuario=GestorUsuarios.getGestorUsuarios().buscarUsuarioGestor(pNombreUsuario);
+    	int maxPunt=GestorPartidas.getGestorPartidas().obtenerMaxPuntuacionHistorica(usuario);
+    	Partida partida=GestorPartidas.getGestorPartidas().buscarPartidaActual(usuario);	//revisar si esta parte se puede eliminar
+    	//igual a estas alturas ya hay fechaFin en la partida, si no la hay, habr�a que ponerla justo aqu�
+
+    	JSONObject datosPartida=GestorPartidas.getGestorPartidas().obtenerDatosPartida(partida,maxPunt);
+    	f1.asignarValoresAParametros(1,datosPartida);
+    	f2.asignarValoresAParametros(2,datosPartida);
+    	f3.asignarValoresAParametros(3,datosPartida);	//si no se ha conseguido ning�n premio, no se har� nada
     	
     	//pasar mensaje a string
     	String mensaje=f1.getFrase()+f2.getFrase()+f3.getFrase();
