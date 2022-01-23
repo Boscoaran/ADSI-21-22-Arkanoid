@@ -1,9 +1,8 @@
 package eus.ehu.adsi.arkanoid.modelo;
 
-public class ColorBola{
-    private String color;
+public class ColorBola extends Personalizable{
 
     public ColorBola(String c) {
-        color = c;
+        super(c);
     }
 }

@@ -14,6 +14,7 @@ public class Partida {
     private List<Ventaja> listaVentajas = new ArrayList<Ventaja>();
     private int nivel;
     private int numVidas;
+    private List<Premio> listaPremios = new ArrayList<Premio>();
 
     public Partida(int puntos, int ladNorm, int ladEsp, boolean vic, Usuario j, int numVidas, int lvl) {
         puntuacion = puntos;
@@ -25,6 +26,7 @@ public class Partida {
         this.numVidas = numVidas;
         nivel = lvl;
     }
+   
 
     public boolean esUsuario(Usuario u) {
         return jugador.equals(u);
@@ -42,9 +44,6 @@ public class Partida {
     	return puntuacion;
     }
     
-    public Usuario getJugador() {
-    	return jugador;
-    }
 
     public void setHoraFin(LocalDateTime fechaHoraFin) {
         fechaFin = fechaHoraFin;
@@ -72,5 +71,29 @@ public class Partida {
     
     public void setFechaFin() {
         this.fechaFin = LocalDateTime.now();
+    }
+    
+    public void annadirPremios(List<Premio> premios){
+        listaPremios.addAll(premios);
+    }
+
+    public boolean isVictoria() {
+        return victoria;
+    }
+
+    public int getLadrillosNormalesDestruidos() {
+        return ladrillosNormalesDestruidos;
+    }
+
+    public int getLadrillosEspecialesDestruidos() {
+        return ladrillosEspecialesDestruidos;
+    }
+
+    public int getNivel() {
+        return nivel;
+    }
+
+    public Usuario getJugador() {
+        return jugador;
     }
 }
