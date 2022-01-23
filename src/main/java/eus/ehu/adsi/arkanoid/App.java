@@ -14,6 +14,8 @@ public class App {
 			EventQueue.invokeAndWait(new Runnable() {
 				public void run(){
 					try {
+						//new IniciarSesion17a();
+						//new Personalizacion21("Bosco");
 						new Inicio16();
 					} catch (Exception e){
 						System.err.println(e);
