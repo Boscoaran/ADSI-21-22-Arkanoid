@@ -323,7 +323,7 @@ public class DataBase {
         Statement s = con.createStatement();
         int v = 0;
         if (victoria) v = 1;
-        s.execute("INSERT INTO Partida VALUES (\"" + nombre + "\", \""+ "null" + "\", " + lvl + ", , \""+ "null" + "\", \""+ fecha + "\", " + puntuacion + ", " + ladrillosNormalesDestruidos + ", " + ladrillosEspecialesDestruidos + ", " + v + ", " + numVidas + ")");       
+        s.execute("INSERT INTO Partida VALUES (\"" + nombre + "\", \""+ "null" + "\", " + lvl + ", " + 0 +  ", \""+ "null" + "\", \""+ fecha + "\", " + puntuacion + ", " + ladrillosNormalesDestruidos + ", " + ladrillosEspecialesDestruidos + ", " + v + ", " + numVidas + ")");       
     }
     
     public int getMaxPunt(String nombre) throws SQLException {
