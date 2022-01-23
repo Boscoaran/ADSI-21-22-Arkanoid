@@ -6,6 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 import eus.ehu.adsi.arkanoid.view.CrearCuenta17d;
 import eus.ehu.adsi.arkanoid.view.IniciarSesion17a;
 import eus.ehu.adsi.arkanoid.view.Inicio16;
+import eus.ehu.adsi.arkanoid.view.Ranking22;
 
 public class App {
 
@@ -14,8 +15,6 @@ public class App {
 			EventQueue.invokeAndWait(new Runnable() {
 				public void run(){
 					try {
-						//new IniciarSesion17a();
-						//new Personalizacion21("Bosco");
 						new Inicio16();
 					} catch (Exception e){
 						System.err.println(e);

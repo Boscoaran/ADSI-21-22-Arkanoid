@@ -297,7 +297,6 @@ public class Ranking22 {
             lblJugador = new JLabel(nombre + separacion + puntos);
 			lblJugador.setForeground(Color.WHITE);
             lblJugador.setFont(impact.deriveFont(20.0f));
-			System.out.println(lblJugador.getText());
 		return lblJugador;
 	}
 
@@ -331,6 +330,7 @@ public class Ranking22 {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					frame.dispose();
+					new MenuPrincipal18(jugador);
 				}
 				@Override
 				public void mouseEntered(MouseEvent e){

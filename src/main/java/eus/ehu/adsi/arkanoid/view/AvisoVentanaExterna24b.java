@@ -134,4 +134,9 @@ public class AvisoVentanaExterna24b {
         
         return botonAceptar;
     }
+
+	public URI getUri(){
+        return linkRedSocial;
+    }
+
 }
