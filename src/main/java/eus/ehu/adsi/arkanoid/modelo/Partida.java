@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.json.JSONObject;
+
 public class Partida {
     private int puntuacion;
     private int ladrillosNormalesDestruidos;
@@ -31,5 +33,23 @@ public class Partida {
         listaVentajas.add(v);
     }
 
-
+       public int getPuntuacion() {
+    	return puntuacion;
+    }
+    
+    public Usuario getJugador() {
+    	return jugador;
+    }
+    
+    public JSONObject obtenerDatos(int pMaxPuntUsuario) {
+    	JSONObject json = new JSONObject();
+    	json.put("usuario",jugador.getNombre());
+    	json.put("victoria",victoria);
+    	json.put("puntuacion",puntuacion);
+    	json.put("maxPunt",pMaxPuntUsuario);
+    	//json.put("nivel", nivel.getNumNivel());
+        List<Premio> listaPremios = new ArrayList<>();
+    	json.put("premios",listaPremios);	//estar� vac�a si no ha habido premios
+    	return json;
+    }
 }

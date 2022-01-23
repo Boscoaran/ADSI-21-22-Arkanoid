@@ -1,8 +1,6 @@
 package eus.ehu.adsi.arkanoid.view;
 
-import eus.ehu.adsi.arkanoid.controlador.ArkanoidFrontera;
 import eus.ehu.adsi.arkanoid.view.game.Config;
-import org.json.JSONObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,7 +26,7 @@ public class MenuPrincipal18 extends JFrame {
 
     private void drawScene() {
 
-        this.getContentPane().setBackground(Config.BACKGROUND_COLOR);
+        this.getContentPane().setBackground(Color.BLACK);
         this.setLayout(new FlowLayout());
 
         JLabel textoNombre = new JLabel(nombreUsuario);
@@ -41,6 +39,7 @@ public class MenuPrincipal18 extends JFrame {
         this.add(botonCerrar());
         this.add(botonCambiar());
     }
+
 
     private JButton botonJugar() {
 
@@ -78,7 +77,8 @@ public class MenuPrincipal18 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                System.out.println("Ajustes, añadir fig");
+                dispose();
+                new Personalizacion21(nombreUsuario);
             }
         });
         return ajustes;
@@ -106,7 +106,7 @@ public class MenuPrincipal18 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                new CambiarContraseña20(nombreUsuario);
+                new CambiarContrasena20(nombreUsuario);
             }
         });
         return cambiar;

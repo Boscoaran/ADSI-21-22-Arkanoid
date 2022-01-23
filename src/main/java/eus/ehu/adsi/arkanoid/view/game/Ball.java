@@ -2,6 +2,8 @@ package eus.ehu.adsi.arkanoid.view.game;
 
 import java.awt.Graphics;
 
+import eus.ehu.adsi.arkanoid.controlador.ArkanoidFrontera;
+
 public class Ball extends GameObject {
 
 	public double x;
@@ -19,7 +21,7 @@ public class Ball extends GameObject {
 	}
 
 	public void draw(Graphics g) {
-		g.setColor(Config.BALL_COLOR);
+		g.setColor(Config.getBolaColor());
 		g.fillOval((int) left(), (int) top(), (int) radius * 2,
 				(int) radius * 2);
 	}

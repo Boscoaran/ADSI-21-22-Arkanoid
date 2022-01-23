@@ -63,7 +63,6 @@ public class Inicio16 extends JFrame {
             public void actionPerformed(ActionEvent e)
             {
                 new CrearCuenta17d();
-                dispose();
             }
         });
         return registrar;

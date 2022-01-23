@@ -50,6 +50,7 @@ public class Arkanoid extends JFrame implements KeyListener { //No se si se podr
 	public Arkanoid(int lvl) {
 
 		
+		
 		game = new Game ();
 		nivel = lvl;
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -172,7 +173,7 @@ public class Arkanoid extends JFrame implements KeyListener { //No se si se podr
 
 			g = bf.getDrawGraphics();
 
-			g.setColor(Config.BACKGROUND_COLOR);
+			g.setColor(Config.getBackGroundColor());
 			g.fillRect(0, 0, getWidth(), getHeight());
 
 			if (b != null) b.draw(g);

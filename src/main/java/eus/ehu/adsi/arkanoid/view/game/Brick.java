@@ -2,6 +2,7 @@ package eus.ehu.adsi.arkanoid.view.game;
 
 import java.awt.Graphics;
 
+
 public class Brick extends Rectangle {
 
 	public boolean destroyed = false;
@@ -19,7 +20,7 @@ public class Brick extends Rectangle {
 
 	public void draw(Graphics g) {
 		if (suerte) g.setColor(Config.BRICK_COLOR_SUERTE);
-		else g.setColor(Config.BRICK_COLOR);
+		else g.setColor(Config.getLadrilloColor());
 		g.fillRect((int) left(), (int) top(), (int) sizeX, (int) sizeY);
 	}
 

@@ -4,13 +4,15 @@ import eus.ehu.adsi.arkanoid.view.game.Config;
 
 import javax.swing.JFrame;
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.JLabel;
 
 import javax.swing.JPanel;
 
-import eus.ehu.adsi.arkanoid.controlador.ArkanoidFrontera;
-import eus.ehu.adsi.arkanoid.view.game.Config;
+import org.json.JSONObject;
 
+import eus.ehu.adsi.arkanoid.controlador.ArkanoidFrontera;
 import javax.swing.JButton;
 
 import java.awt.GridBagLayout;
@@ -24,6 +26,9 @@ import javax.swing.ImageIcon;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.awt.Font;
 
 public class Personalizacion21 {
@@ -43,6 +48,8 @@ public class Personalizacion21 {
     private JComboBox<String> comboBoxLadrillo;
 	private boolean sonido;
 	private String nombreUsuario;
+	private JLabel lblTitulo;
+	private Font impact = AddFont.createFont();
 	
 	
 	public Personalizacion21(String nombre) {
@@ -52,19 +59,20 @@ public class Personalizacion21 {
 	
 	
 	private void initialize() {
+		JSONObject j = ArkanoidFrontera.getArkanoidFrontera().cargarDatosPersonalizacion(nombreUsuario);
 		frame = new JFrame();
 		frame.setSize(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
 		frame.setTitle("Personalización");
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(getPanelCentro());
+		frame.getContentPane().add(getPanelCentro(j));
 		frame.setLocationRelativeTo(null);
 		frame.setBackground(Color.BLACK);
 		frame.setVisible(true);
 	}
 	
-	private JPanel getPanelCentro() {
+	private JPanel getPanelCentro(JSONObject j) {
 		if (panelCentro == null) {
 			panelCentro = new JPanel();
 			panelCentro.setBounds(0, 0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
@@ -74,6 +82,14 @@ public class Personalizacion21 {
 			gbl_panelCentro.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 			gbl_panelCentro.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 			panelCentro.setLayout(gbl_panelCentro);
+
+			//LBL TITULO
+			GridBagConstraints gbc_lblTitulo = new GridBagConstraints();
+			gbc_lblTitulo.anchor = GridBagConstraints.EAST;
+			gbc_lblTitulo.insets = new Insets(0, 0, 0, 0);
+			gbc_lblTitulo.gridx = 3;
+			gbc_lblTitulo.gridy = 0;
+			panelCentro.add(getLblTitulo(), gbc_lblTitulo);
 
             //LBL BG
 			GridBagConstraints gbc_lblBackGround = new GridBagConstraints();
@@ -124,6 +140,7 @@ public class Personalizacion21 {
 			gbc_comboBoxBall.gridy = 1;
 			panelCentro.add(getComboBoxBall(), gbc_comboBoxBall);
 
+
             //CB PADDLE
             GridBagConstraints gbc_comboBoxPaddle = new GridBagConstraints();
 			gbc_comboBoxPaddle.insets = new Insets(0, 10, 0, 0);
@@ -131,6 +148,8 @@ public class Personalizacion21 {
 			gbc_comboBoxPaddle.gridx = 1;
 			gbc_comboBoxPaddle.gridy = 2;
 			panelCentro.add(getComboBoxPaddle(), gbc_comboBoxPaddle);
+			
+			
 
             //CB LADRILLO
             GridBagConstraints gbc_comboBoxLadrillo = new GridBagConstraints();
@@ -146,7 +165,7 @@ public class Personalizacion21 {
             gbc_btnSonido.fill = GridBagConstraints.BOTH;
 			gbc_btnSonido.gridx = 3;
 			gbc_btnSonido.gridy = 2;
-			panelCentro.add(getBtnSonido(), gbc_btnSonido);
+			panelCentro.add(getBtnSonido(j.getInt("Sonido")), gbc_btnSonido);
 
             //BTN ACEPTAR
 			GridBagConstraints gbc_btnAceptar = new GridBagConstraints();
@@ -173,16 +192,19 @@ public class Personalizacion21 {
 			btnAceptar.setFocusPainted(false);
 			btnAceptar.setContentAreaFilled(false);
 			btnAceptar.setForeground(Color.WHITE);
-			btnAceptar.setFont(new Font("Impact", Font.PLAIN, 30));
+			btnAceptar.setFont(impact.deriveFont(45.0f));
 			btnAceptar.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					//frame.dispose();
+					
 					String colorBola = comboBoxBall.getSelectedItem().toString();
 					String colorPadel = comboBoxPaddle.getSelectedItem().toString();
 					String colorLadrillo = comboBoxLadrillo.getSelectedItem().toString();
 					String colorFondo = comboBoxBackGround.getSelectedItem().toString();
 					ArkanoidFrontera.getArkanoidFrontera().cambiarAjustes(colorBola, colorPadel, colorLadrillo, colorFondo, sonido, nombreUsuario);
+					frame.dispose();
+					new MenuPrincipal18(nombreUsuario);
+
 				}
 				@Override
 				public void mouseEntered(MouseEvent e){
@@ -204,12 +226,12 @@ public class Personalizacion21 {
 			btnCancelar.setFocusPainted(false);
 			btnCancelar.setContentAreaFilled(false);
 			btnCancelar.setForeground(Color.WHITE);
-			btnCancelar.setFont(new Font("Impact", Font.PLAIN, 30));
+			btnCancelar.setFont(impact.deriveFont(45.0f));
 			btnCancelar.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					//new menu principal
 					frame.dispose();
+					new MenuPrincipal18(nombreUsuario);
 				}
 				@Override
 				public void mouseEntered(MouseEvent e){
@@ -224,10 +246,18 @@ public class Personalizacion21 {
 		return btnCancelar;
 	}
 
+	private JLabel getLblTitulo() {
+		if (lblTitulo == null) {
+			lblTitulo = new JLabel("Ajustes", JLabel.CENTER);
+			lblTitulo.setFont(impact.deriveFont(80.0f));
+			lblTitulo.setForeground(Color.WHITE);
+			}
+		return lblTitulo;
+	}
 	private JLabel getLblBackGround() {
 		if (lblBackGround == null) {
 			lblBackGround = new JLabel("Fondo:", JLabel.CENTER);
-			lblBackGround.setFont(new Font("Impact", Font.PLAIN, 48));
+			lblBackGround.setFont(impact.deriveFont(30.0f));
 			lblBackGround.setForeground(Color.WHITE);
 			}
 		return lblBackGround;
@@ -236,7 +266,7 @@ public class Personalizacion21 {
     private JLabel getLblBall() {
 		if (lblBall == null) {
 			lblBall = new JLabel("Bola:", JLabel.CENTER);
-			lblBall.setFont(new Font("Impact", Font.PLAIN, 48));
+			lblBall.setFont(impact.deriveFont(30.0f));
 			lblBall.setForeground(Color.WHITE);
 			}
 		return lblBall;
@@ -245,7 +275,7 @@ public class Personalizacion21 {
     private JLabel getLblPaddle() {
 		if (lblPaddle == null) {
 			lblPaddle = new JLabel("Paddle:", JLabel.CENTER);
-			lblPaddle.setFont(new Font("Impact", Font.PLAIN, 48));
+			lblPaddle.setFont(impact.deriveFont(30.0f));
 			lblPaddle.setForeground(Color.WHITE);
 			}
 		return lblPaddle;
@@ -254,7 +284,7 @@ public class Personalizacion21 {
     private JLabel getLblLadrillo() {
 		if (lblLadrillo == null) {
 			lblLadrillo = new JLabel("Ladrillo:", JLabel.CENTER);
-			lblLadrillo.setFont(new Font("Impact", Font.PLAIN, 48));
+			lblLadrillo.setFont(impact.deriveFont(30.0f));
 			lblLadrillo.setForeground(Color.WHITE);
 			}
 		return lblLadrillo;
@@ -263,9 +293,11 @@ public class Personalizacion21 {
     private JComboBox<String> getComboBoxBackGround() {
 		if (comboBoxBackGround == null) {
 			comboBoxBackGround = new JComboBox<String>();
-			comboBoxBackGround.setModel(new DefaultComboBoxModel<String>(new String[] {"Color1", "Color2", "Color3"}));
+			JSONObject colores = ArkanoidFrontera.getArkanoidFrontera().getColores("fondo", nombreUsuario);
+			comboBoxBackGround.setModel(new DefaultComboBoxModel<String>());
+			this.añadirColores(comboBoxBackGround, colores);
 			comboBoxBackGround.setForeground(Color.BLACK);
-			comboBoxBackGround.setFont(new Font("Impact", Font.PLAIN, 25));
+			comboBoxBackGround.setFont(impact);
 		}
 		return comboBoxBackGround;
 	}
@@ -273,9 +305,11 @@ public class Personalizacion21 {
     private JComboBox<String> getComboBoxBall() {
 		if (comboBoxBall == null) {
 			comboBoxBall = new JComboBox<String>();
-			comboBoxBall.setModel(new DefaultComboBoxModel<String>(new String[] {"Color1", "Color2", "Color3"}));
+			JSONObject colores = ArkanoidFrontera.getArkanoidFrontera().getColores("bola", nombreUsuario);
+			comboBoxBall.setModel(new DefaultComboBoxModel<String>());
+			this.añadirColores(comboBoxBall, colores);
 			comboBoxBall.setForeground(Color.BLACK);
-			comboBoxBall.setFont(new Font("Impact", Font.PLAIN, 25));
+			comboBoxBall.setFont(impact);
 		}
 		return comboBoxBall;
 	}
@@ -283,9 +317,11 @@ public class Personalizacion21 {
     private JComboBox<String> getComboBoxPaddle() {
 		if (comboBoxPaddle == null) {
 			comboBoxPaddle = new JComboBox<String>();
-			comboBoxPaddle.setModel(new DefaultComboBoxModel<String>(new String[] {"Color1", "Color2", "Color3"}));
+			JSONObject colores = ArkanoidFrontera.getArkanoidFrontera().getColores("paddle", nombreUsuario);
+			comboBoxPaddle.setModel(new DefaultComboBoxModel<String>());
+			this.añadirColores(comboBoxPaddle, colores);
 			comboBoxPaddle.setForeground(Color.BLACK);
-			comboBoxPaddle.setFont(new Font("Impact", Font.PLAIN, 25));
+			comboBoxPaddle.setFont(impact);
 		}
 		return comboBoxPaddle;
 	}
@@ -293,18 +329,55 @@ public class Personalizacion21 {
     private JComboBox<String> getComboBoxLadrillo() {
 		if (comboBoxLadrillo == null) {
 			comboBoxLadrillo = new JComboBox<String>();
-			comboBoxLadrillo.setModel(new DefaultComboBoxModel<String>(new String[] {"Color1", "Color2", "Color3"}));
+			JSONObject colores = ArkanoidFrontera.getArkanoidFrontera().getColores("ladrillo", nombreUsuario);
+			comboBoxLadrillo.setModel(new DefaultComboBoxModel<String>());
+			this.añadirColores(comboBoxLadrillo, colores);
 			comboBoxLadrillo.setForeground(Color.BLACK);
-			comboBoxLadrillo.setFont(new Font("Impact", Font.PLAIN, 25));
+			comboBoxLadrillo.setFont(impact);
 		}
 		return comboBoxLadrillo;
 	}
 
-    private JButton getBtnSonido() {
+	private void añadirColores(JComboBox comboBox, JSONObject colores){
+		Iterator <String> keys = colores.keys();
+		while(keys.hasNext()){
+			String key = keys.next();
+			if ((int)colores.get(key) == 1){
+				List<Character> lChar = new ArrayList<>();
+				for (char c : key.toCharArray()){
+					lChar.add(c);
+				}
+				boolean primeraPalabra = true;
+				List<Character> lChar2 = new ArrayList<>();
+				for (Character car : lChar) {
+					if (!primeraPalabra || Character.isUpperCase(car)){
+						primeraPalabra = false;
+						lChar2.add(car);
+					}
+				}
+				StringBuilder sb = new StringBuilder();
+				for (Character car : lChar2){
+					sb.append(car);
+				}
+				comboBox.addItem(sb.toString());
+			}
+		}
+		
+	}
+
+    private JButton getBtnSonido(int s) {
 		if (btnSonido == null) {
+			
             btnSonido = new JButton("");
 			try {
-                ImageIcon imgIcon = new ImageIcon("src/main/resources/unmuted.png");
+				ImageIcon imgIcon;
+				if (s == 1) {
+					sonido = true;
+					imgIcon = new ImageIcon("src/main/resources/unmuted.png");
+				} else {
+					sonido = false;
+					imgIcon = new ImageIcon("src/main/resources/muted.png");
+				} 
                 Image image = imgIcon.getImage();
 				Image imageReszie = image.getScaledInstance(100,80, java.awt.Image.SCALE_SMOOTH);
 				imgIcon = new ImageIcon(imageReszie);
@@ -312,6 +385,7 @@ public class Personalizacion21 {
             } catch (Exception ex){
                 System.out.println(ex);
             }
+
             btnSonido.setContentAreaFilled(false);
 			btnSonido.setFocusPainted(false);
 			btnSonido.setBorderPainted(false);
@@ -321,14 +395,14 @@ public class Personalizacion21 {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					if (sonido){
-						ImageIcon imgIcon = new ImageIcon("src/main/resources/unmuted.png");
+						ImageIcon imgIcon = new ImageIcon("src/main/resources/muted.png");
                 		Image image = imgIcon.getImage();
 						Image imageReszie = image.getScaledInstance(100,80, java.awt.Image.SCALE_SMOOTH);
 						imgIcon = new ImageIcon(imageReszie);
 						btnSonido.setIcon(imgIcon);
 						sonido = false;
 					} else {
-						ImageIcon imgIcon = new ImageIcon("src/main/resources/muted.png");
+						ImageIcon imgIcon = new ImageIcon("src/main/resources/unmuted.png");
                			Image image = imgIcon.getImage();
 						Image imageReszie = image.getScaledInstance(100,80, java.awt.Image.SCALE_SMOOTH);
 						imgIcon = new ImageIcon(imageReszie);

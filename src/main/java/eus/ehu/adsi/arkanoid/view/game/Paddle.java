@@ -2,6 +2,8 @@ package eus.ehu.adsi.arkanoid.view.game;
 
 import java.awt.Graphics;
 
+import eus.ehu.adsi.arkanoid.controlador.ArkanoidFrontera;
+
 
 public class Paddle extends Rectangle {
 
@@ -42,7 +44,7 @@ public class Paddle extends Rectangle {
 	}
 
 	public void draw(Graphics g) {
-		g.setColor(Config.PADDLE_COLOR);
+		g.setColor(Config.getPaddleColor());
 		g.fillRect((int) (left()), (int) (top()), (int) sizeX, (int) sizeY);
 	}
 

@@ -42,4 +42,8 @@ public class GestorPartidas {
     public void anadir(Partida p) {
         this.lPartidas.add(p);
     }
+
+    public JSONObject obtenerDatosPartida(Partida p, int pMaxPuntUsuario) {
+    	return p.obtenerDatos();
+    }
 }
