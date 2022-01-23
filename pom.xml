@@ -1,8 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
-	com.sun.mail:javax.mail-api:jar:1.6.1="https://mvnrepository.com/artifact/com.sun.mail/javax.mail">
-
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ADSI-Arkanoid</groupId>
 	<artifactId>ADSI-Arkanoid</artifactId>
@@ -42,9 +40,14 @@
 		</dependency>
 		<!-- Java Mail -->
 		<dependency>
-			<groupId>com.sun.mail</groupId>
+			<groupId>javax.mail</groupId>
 			<artifactId>javax.mail-api</artifactId>
-			<version>1.6.2</version>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.6.1</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -78,14 +81,6 @@
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>3.3.0</version>
 			</plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                </configuration>
-            </plugin>
-        </plugins>
+		</plugins>
 	</build>
 </project>
