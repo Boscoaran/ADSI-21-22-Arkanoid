@@ -22,6 +22,7 @@ public class LadrilloSuerteTests {
 	ScoreBoard sc = new ScoreBoard();
 	int nivel = 1;
 	Arkanoid a = new Arkanoid(1);
+	
 
 	public void F4P1() {
 		//Descripción: El usuario pulsa el botón de “aceptar” en la interfaz al seleccionar el nivel.
@@ -205,8 +206,8 @@ public class LadrilloSuerteTests {
 
 	}
 
-	//--------PRUEBAS ADICIONALES SÍ AUTOMATIZADAS--------//
+	//--------PRUEBAS DE CAJA BLANCA--------//
 
-	
+
 }
 
