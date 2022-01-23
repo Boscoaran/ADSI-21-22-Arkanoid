@@ -33,15 +33,18 @@ public class DataBase {
 			System.out.println("Error al registrar el dirver de MySQL:" + e);
 		}
         Statement s = con.createStatement();
-        ResultSet rs1;
+        ResultSet rs;
 		if (nivel == 0){
-            rs1 = s.executeQuery("SELECT nombreUsuario, puntuacion FROM partida ORDER BY puntuacion DESC, fechaFin ASC LIMIT 1 OFFSET " + (p-1));
+            rs = s.executeQuery("SELECT NombreUsuario, Puntuacion FROM Partida ORDER BY Puntuacion DESC, FechaFin ASC LIMIT 1 OFFSET " + (p-1));
         }else{
-            rs1 = s.executeQuery("SELECT nombreUsuario, puntuacion FROM partida WHERE nivel=\""+ nivel + "\" ORDER BY puntuacion DESC, fechaFin ASC LIMIT 1 OFFSET " + (p-1));
+            rs = s.executeQuery("SELECT NombreUsuario, Puntuacion FROM Partida WHERE NombreNivel=\""+ nivel + "\" ORDER BY Puntuacion DESC, FechaFin ASC LIMIT 1 OFFSET " + (p-1));
         }
-        rs1.next(); //TO DO: Arreglar esto, que sino peta
-        jugadorPuntuacion.put("nombre", rs1.getString(1));
-        jugadorPuntuacion.put("puntos", rs1.getInt(2));
+        Boolean b = rs.next();
+        if (b){
+            jugadorPuntuacion.put("nombre", rs.getString(1));
+            jugadorPuntuacion.put("puntos", rs.getInt(2));
+        }
+        System.out.println(jugadorPuntuacion.get("nombre"));
         return jugadorPuntuacion;
     }
 
@@ -57,9 +60,9 @@ public class DataBase {
         Statement s = con.createStatement();
         ResultSet rs1;
         if (nivel == 0){
-            rs1 = s.executeQuery("SELECT puntuacion FROM partida WHERE nombreUsuario=\""+ nombre +"\" ORDER BY puntuacion DESC, fechaFin ASC LIMIT 1 OFFSET " + (p-1));
+            rs1 = s.executeQuery("SELECT Puntuacion FROM Partida WHERE NombreUsuario=\""+ nombre +"\" ORDER BY Puntuacion DESC, FechaFin ASC LIMIT 1 OFFSET " + (p-1));
         }else{
-            rs1 = s.executeQuery("SELECT puntuacion FROM partida WHERE nombreUsuario=\""+ nombre +"\" AND nivel=\""+ nivel +"\" ORDER BY puntuacion DESC, fechaFin ASC LIMIT 1 OFFSET " + (p-1));
+            rs1 = s.executeQuery("SELECT Puntuacion FROM Partida WHERE NombreUsuario=\""+ nombre +"\" AND Nivel=\""+ nivel +"\" ORDER BY Puntuacion DESC, FechaFin ASC LIMIT 1 OFFSET " + (p-1));
         }
         rs1.next();
         puntuacion.put("nombre", nombre);
@@ -78,10 +81,10 @@ public class DataBase {
         Statement s = con.createStatement();
         ResultSet rs1;
         if (nivel == 0){
-		    rs1 = s.executeQuery("SELECT count(*) FROM partida WHERE victoria=1");
+		    rs1 = s.executeQuery("SELECT count(*) FROM Partida WHERE Victoria=1");
             rs1.next();
         } else {
-            rs1 = s.executeQuery("SELECT count(*) FROM partida WHERE victoria=1 AND nivel=\""+nivel+"\"");
+            rs1 = s.executeQuery("SELECT count(*) FROM Partida WHERE Victoria=1 AND NombreNivel=\""+nivel+"\"");
             rs1.next();
         }
         return rs1.getInt(1);
@@ -98,10 +101,10 @@ public class DataBase {
         Statement s = con.createStatement();
         ResultSet rs1;
         if (nivel == 0){
-		    rs1 = s.executeQuery("SELECT count(*) FROM partida WHERE victoria=1 AND nombreUsuario=\"" + nombre + "\"");
+		    rs1 = s.executeQuery("SELECT count(*) FROM Partida WHERE Victoria=1 AND NombreUsuario=\"" + nombre + "\"");
             rs1.next();
         }else{
-            rs1 = s.executeQuery("SELECT count(*) FROM partida WHERE victoria=1 AND nombreUsuario=\"" + nombre + "\" AND nivel=\""+ nivel +"\"");
+            rs1 = s.executeQuery("SELECT count(*) FROM Partida WHERE Victoria=1 AND NombreUsuario=\"" + nombre + "\" AND NombreNivel=\""+ nivel +"\"");
             rs1.next();
         }
         return rs1.getInt(1);
@@ -288,25 +291,92 @@ public class DataBase {
         return false;
     }
 
-    public JSONObject buscarUsuario(String nombreUsuario, String contra) throws SQLException {
+    public void registrarUsuario(String nombreUsuario, String correo, String contrasena1) throws SQLException {
+        Connection con = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error al registrar el driver de MySQL:" + e);
+        }
+        Statement s = con.createStatement();
+        s.executeUpdate("INSERT INTO usuario(nombreUsuario, correo, contraseña) VALUES (\""+nombreUsuario+"\",\""+correo+"\",\""+contrasena1+"\")");
+        con.close();
+        return;
+    }
+
+    public void cambiarContrasena(String nombreUsuario, String contrasena) throws SQLException {
+        Connection con = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error al registrar el driver de MySQL:" + e);
+        }
+        Statement s = con.createStatement();
+        s.executeUpdate("UPDATE usuario SET contraseña = \""+contrasena+"\"WHERE nombreUsuario = \""+nombreUsuario+"\"");
+        con.close();
+        return;
+    }
+
+    public void borrarUsuarios() throws SQLException {
+        Connection con = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error al registrar el driver de MySQL:" + e);
+        }
+        ResultSet rs;
+        Statement s = con.createStatement();
+        s.executeUpdate("DELETE FROM usuario");
+        con.close();
+        return;
+    }
+
+    public JSONObject buscarUsuario(String nombreUsuario) throws SQLException {
+
         JSONObject j = new JSONObject();
         Connection con = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
 		} catch (ClassNotFoundException e) {
-			System.out.println("Error al registrar el dirver de MySQL:" + e);
+			System.out.println("Error al registrar el driver de MySQL:" + e);
 		}
         ResultSet rs;
         Statement s = con.createStatement();
-        rs = s.executeQuery("SELECT * FROM usuario WHERE nombreUsuario = \""+nombreUsuario+"\" AND contraseña = \"" + contra + "\"");
+        rs = s.executeQuery("SELECT * FROM usuario WHERE nombreUsuario = \""+nombreUsuario+"\"");
         boolean b = rs.next();
         if (b) {
             j.put("nombreUsuario", rs.getString(1));
             j.put("correo", rs.getString(2));
             j.put("contra", rs.getString(3));
         }
+        con.close();
+        return j;
+    }
 
+    public JSONObject buscarUsuarioCorreo(String correo) throws SQLException {
+
+        JSONObject j = new JSONObject();
+        Connection con = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error al registrar el driver de MySQL:" + e);
+        }
+        ResultSet rs;
+        Statement s = con.createStatement();
+        rs = s.executeQuery("SELECT * FROM usuario WHERE correo = \""+correo+"\"");
+        boolean b = rs.next();
+        if (b) {
+            j.put("nombreUsuario", rs.getString(1));
+            j.put("correo", rs.getString(2));
+            j.put("contra", rs.getString(3));
+        }
+        con.close();
         return j;
     }
 

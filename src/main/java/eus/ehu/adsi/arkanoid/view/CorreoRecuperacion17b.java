@@ -32,7 +32,7 @@ public class CorreoRecuperacion17b extends JFrame {
     //Método para dibujar el contenido de la pantalla
     private void drawScene() {
 
-        this.getContentPane().setBackground(Config.BACKGROUND_COLOR);
+        this.getContentPane().setBackground(Color.BLACK);
         this.setLayout(new GridLayout(3,0));
 
         JLabel textoCorreo = new JLabel("Introduce el correo asociado a tu cuenta para recuperar la contraseña:");
@@ -40,18 +40,18 @@ public class CorreoRecuperacion17b extends JFrame {
         textoCorreo.setFont(impact.deriveFont(20.0f));
         JPanel texto = new JPanel();
         texto.setLayout(new GridBagLayout());
-        texto.setBackground(Config.BACKGROUND_COLOR);
+        texto.setBackground(Color.BLACK);
         texto.add(textoCorreo);
         this.add(texto);
 
         correo = new JTextField("", 20);
         JPanel campo = new JPanel();
-        campo.setBackground(Config.BACKGROUND_COLOR);
+        campo.setBackground(Color.BLACK);
         campo.add(correo);
         this.add(campo);
 
         JPanel botones = new JPanel();
-        botones.setBackground(Config.BACKGROUND_COLOR);
+        botones.setBackground(Color.BLACK);
         botones.add(botonCancelar());
         botones.add(botonEnviar());
         this.add(botones);

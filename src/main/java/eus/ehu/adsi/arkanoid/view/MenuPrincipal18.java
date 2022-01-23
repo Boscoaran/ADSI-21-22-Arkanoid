@@ -67,7 +67,8 @@ public class MenuPrincipal18 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                System.out.println("Ranking, añadir fig");
+                dispose();
+                new Ranking22(nombreUsuario);
             }
         });
         return ranking;
@@ -96,7 +97,8 @@ public class MenuPrincipal18 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                System.out.println("Cerrar sesión, añadir fig");
+                dispose();
+                new Inicio16();
             }
         });
         return cerrar;
@@ -110,6 +112,7 @@ public class MenuPrincipal18 extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                dispose();
                 new CambiarContrasena20(nombreUsuario);
             }
         });

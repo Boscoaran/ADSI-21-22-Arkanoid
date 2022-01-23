@@ -22,23 +22,24 @@ public class GestorUsuarios {
         return mGestorUsuarios;
     }
 
-    public Usuario buscarUsuario(String nombreUsuario, String contra) {
-        Usuario u = null;
+    public Usuario buscarUsuario(String nombreUsuario) {
 
+        Usuario u = buscarUsuarioGestor(nombreUsuario);
         JSONObject j = null;
-        try {
-            j = DataBase.getmDataBase().buscarUsuario(nombreUsuario, contra);
-        } catch (Exception e) {
-           System.err.println(e);
-        }
 
-        if (j.has("nombreUsuario")) {
-            u = new Usuario(j.getString("nombreUsuario"), j.getString("correo"), j.getString("contra"));
-            GestorUsuarios.getGestorUsuarios().anadir(u);
-        }
+        if (u == null) {
+            try {
+                j = DataBase.getmDataBase().buscarUsuario(nombreUsuario);
+            } catch (Exception e) {
+                System.err.println(e);
+            }
 
+            if (j.has("nombreUsuario")) {
+                u = new Usuario(j.getString("nombreUsuario"), j.getString("correo"), j.getString("contra"));
+                GestorUsuarios.getGestorUsuarios().anadir(u);
+            }
+        }
         return u;
-        
     }
     public Usuario buscarUsuarioGestor(String nombreUsuario) {
         for (Usuario u : lUsuarios) {
@@ -54,6 +55,26 @@ public class GestorUsuarios {
      * @return si existe, el objeto Usuario que tenga el correo | si no existe, null
      */
     public Usuario buscarUsuarioCorreo(String correo) {
+
+        Usuario u = buscarUsuarioCorreoGestor(correo);
+        JSONObject j = null;
+
+        if (u == null) {
+            try {
+                j = DataBase.getmDataBase().buscarUsuarioCorreo(correo);
+            } catch (Exception e) {
+                System.err.println(e);
+            }
+
+            if (j.has("nombreUsuario")) {
+                u = new Usuario(j.getString("nombreUsuario"), j.getString("correo"), j.getString("contra"));
+                GestorUsuarios.getGestorUsuarios().anadir(u);
+            }
+        }
+        return u;
+    }
+
+    public Usuario buscarUsuarioCorreoGestor(String correo) {
         for (Usuario u : lUsuarios) {
             if (u.esCorreo(correo))
                 return u;
@@ -78,6 +99,11 @@ public class GestorUsuarios {
      */
     public void cambiarContrasena(Usuario U, String contrasena) {
         U.setContrasena(contrasena);
+        try {
+            DataBase.getmDataBase().cambiarContrasena(U.getNombre(), contrasena);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 
     /**
@@ -89,6 +115,12 @@ public class GestorUsuarios {
     public void registrarUsuario(String nombreUsuario, String correo, String contrasena1) {
         //Crear el usuario
         Usuario U = new Usuario(nombreUsuario, correo, contrasena1);
+        //Añadirlo a la BD
+        try {
+            DataBase.getmDataBase().registrarUsuario(nombreUsuario, correo, contrasena1);
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
         //Añadirlo a la lista
         this.lUsuarios.add(U);
     }

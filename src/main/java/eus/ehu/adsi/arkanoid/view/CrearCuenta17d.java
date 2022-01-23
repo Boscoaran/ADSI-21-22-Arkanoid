@@ -53,86 +53,56 @@ public class CrearCuenta17d extends JFrame {
         
         JPanel campos = new JPanel();
         campos.setBackground(Color.BLACK);
-        GridBagLayout gbl_campos = new GridBagLayout();
-			gbl_campos.columnWidths = new int[]{20,100, 100,20};
-			gbl_campos.rowHeights = new int[]{100, 100, 100, 100};
-			gbl_campos.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-			gbl_campos.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-        campos.setLayout(gbl_campos);
+        campos.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
 
-        JLabel textoNombre = new JLabel("Nombre:  ", JLabel.RIGHT);
+        JLabel textoNombre = new JLabel("Nombre:");
         textoNombre.setForeground(Color.WHITE);
         textoNombre.setFont(impact.deriveFont(30.0f));
-        GridBagConstraints gbc_lblTNombre = new GridBagConstraints();
-		gbc_lblTNombre.anchor = GridBagConstraints.EAST;
-		gbc_lblTNombre.insets = new Insets(0, 0, 0, 0);
-		gbc_lblTNombre.gridx = 1;
-		gbc_lblTNombre.gridy = 0;
-		campos.add(textoNombre, gbc_lblTNombre);
-
+        c.anchor = GridBagConstraints.EAST;
+        c.gridx = 0;
+        c.gridy = 0;
+        campos.add(textoNombre, c);
         nombre = new JTextField("", 30);
-        GridBagConstraints gbc_TFNombre = new GridBagConstraints();
-		gbc_TFNombre.anchor = GridBagConstraints.WEST;
-		gbc_TFNombre.insets = new Insets(0, 0, 0, 0);
-		gbc_TFNombre.gridx = 2;
-		gbc_TFNombre.gridy = 0;
-		campos.add(nombre, gbc_TFNombre);
+        c.gridx = 1;
+        c.gridy = 0;
+        campos.add(nombre, c);
 
-        JLabel textoCorreo = new JLabel("Correo:  ", JLabel.RIGHT);
+        JLabel textoCorreo = new JLabel("Correo:");
         textoCorreo.setForeground(Color.WHITE);
         textoCorreo.setFont(impact.deriveFont(30.0f));
-        GridBagConstraints gbc_lblCorreo = new GridBagConstraints();
-		gbc_lblCorreo.anchor = GridBagConstraints.EAST;
-		gbc_lblCorreo.insets = new Insets(0, 0, 0, 0);
-		gbc_lblCorreo.gridx = 1;
-		gbc_lblCorreo.gridy = 1;
-		campos.add(textoCorreo, gbc_lblCorreo);
-
+        c.anchor = GridBagConstraints.EAST;
+        c.gridx = 0;
+        c.gridy = 1;
+        campos.add(textoCorreo, c);
         correo = new JTextField("", 30);
-        GridBagConstraints gbc_TFCorreo = new GridBagConstraints();
-		gbc_TFCorreo.anchor = GridBagConstraints.WEST;
-		gbc_TFCorreo.insets = new Insets(0, 0, 0, 0);
-		gbc_TFCorreo.gridx = 2;
-		gbc_TFCorreo.gridy = 1;
-		campos.add(correo, gbc_TFCorreo);
-    
-        JLabel textoContrasena1 = new JLabel("Contraseña:  ", JLabel.RIGHT);
+        c.gridx = 1;
+        c.gridy = 1;
+        campos.add(correo, c);
+
+        JLabel textoContrasena1 = new JLabel("Contraseña:");
         textoContrasena1.setForeground(Color.WHITE);
         textoContrasena1.setFont(impact.deriveFont(30.0f));
-        GridBagConstraints gbc_lblContra1 = new GridBagConstraints();
-		gbc_lblContra1.anchor = GridBagConstraints.EAST;
-		gbc_lblContra1.insets = new Insets(0, 0, 0, 0);
-		gbc_lblContra1.gridx = 1;
-		gbc_lblContra1.gridy = 2;
-		campos.add(textoContrasena1, gbc_lblContra1);
-
+        c.anchor = GridBagConstraints.EAST;
+        c.gridx = 0;
+        c.gridy = 2;
+        campos.add(textoContrasena1, c);
         contrasena1 = new JPasswordField("", 30);
-        GridBagConstraints gbc_PFContra1 = new GridBagConstraints();
-		gbc_PFContra1.anchor = GridBagConstraints.WEST;
-		gbc_PFContra1.insets = new Insets(0, 0, 0, 0);
-		gbc_PFContra1.gridx = 2;
-		gbc_PFContra1.gridy = 2;
-		campos.add(contrasena1, gbc_PFContra1);
-        
+        c.gridx = 1;
+        c.gridy = 2;
+        campos.add(contrasena1, c);
 
-        JLabel textoContrasena2 = new JLabel("Confirmar contraseña:  ", JLabel.RIGHT);
+        JLabel textoContrasena2 = new JLabel("Confirmar contraseña:");
         textoContrasena2.setForeground(Color.WHITE);
-        textoContrasena2.setFont(impact.deriveFont(28.0f));
-        GridBagConstraints gbc_lblContra2 = new GridBagConstraints();
-		gbc_lblContra2.anchor = GridBagConstraints.EAST;
-		gbc_lblContra2.insets = new Insets(0, 0, 0, 0);
-		gbc_lblContra2.gridx = 1;
-		gbc_lblContra2.gridy = 3;
-		campos.add(textoContrasena2, gbc_lblContra2);
-
+        textoContrasena2.setFont(impact.deriveFont(30.0f));
+        c.anchor = GridBagConstraints.EAST;
+        c.gridx = 0;
+        c.gridy = 3;
+        campos.add(textoContrasena2, c);
         contrasena2 = new JPasswordField("", 30);
-        GridBagConstraints gbc_PFContra2 = new GridBagConstraints();
-		gbc_PFContra2.anchor = GridBagConstraints.WEST;
-		gbc_PFContra2.insets = new Insets(0, 0, 0, 0);
-		gbc_PFContra2.gridx = 2;
-		gbc_PFContra2.gridy = 3;
-		campos.add(contrasena2, gbc_PFContra2);
-     
+        c.gridx = 1;
+        c.gridy = 3;
+        campos.add(contrasena2, c);
 
         this.add(campos, BorderLayout.CENTER);
 

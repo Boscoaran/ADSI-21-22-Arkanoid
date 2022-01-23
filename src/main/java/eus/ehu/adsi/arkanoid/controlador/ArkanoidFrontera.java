@@ -5,6 +5,7 @@ import java.sql.Time;
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Random;
 import java.awt.Color;
 import java.io.File;
@@ -17,12 +18,14 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import eus.ehu.adsi.arkanoid.view.PremiosConseguidos23;
 import org.json.JSONObject;
 
 import eus.ehu.adsi.arkanoid.view.game.core.*;
 import eus.ehu.adsi.arkanoid.modelo.DataBase;
 import eus.ehu.adsi.arkanoid.modelo.FraseMensaje;
 import eus.ehu.adsi.arkanoid.modelo.Partida;
+import eus.ehu.adsi.arkanoid.modelo.Premio;
 import eus.ehu.adsi.arkanoid.modelo.Usuario;
 import eus.ehu.adsi.arkanoid.view.game.Config;
 
@@ -108,7 +111,7 @@ public class ArkanoidFrontera {
         JSONObject resultado = new JSONObject();
 
         //Buscar el usuario por su nombre de usuario
-        Usuario U = GestorUsuarios.getGestorUsuarios().buscarUsuario(nombreUsuario, contrasena);
+        Usuario U = GestorUsuarios.getGestorUsuarios().buscarUsuario(nombreUsuario);
 
         //Comprobar si el usuario existe
         if (U != null) {
@@ -361,7 +364,7 @@ public class ArkanoidFrontera {
         //Comprobar que todos los campos estén rellenos
         if (!(nombreUsuario.equals("") || correo.equals("") || contrasena1.equals("") || contrasena2.equals(""))) {
             //Buscar el usuario por su nombre de usuario
-            Usuario U = GestorUsuarios.getGestorUsuarios().buscarUsuarioGestor(nombreUsuario);
+            Usuario U = GestorUsuarios.getGestorUsuarios().buscarUsuario(nombreUsuario);
 
             //Comprobar que el usuario no exista
             if (U == null) {
@@ -444,7 +447,7 @@ public class ArkanoidFrontera {
         //Comprobar que todos los campos estén rellenos
         if (!(nombreUsuario.equals("") || cAnterior.equals("") || cNueva1.equals("") || cNueva2.equals(""))) {
             //Buscar el usuario por su nombre de usuario
-            Usuario U = GestorUsuarios.getGestorUsuarios().buscarUsuarioGestor(nombreUsuario);
+            Usuario U = GestorUsuarios.getGestorUsuarios().buscarUsuario(nombreUsuario);
 
             //Comprobar si la contrasena anterior es correcta
             if (GestorUsuarios.getGestorUsuarios().esContrasena(U, cAnterior)) {
@@ -549,6 +552,11 @@ public class ArkanoidFrontera {
         }
         ArkanoidThread arkanoidThread = new ArkanoidThread();
         arkanoidThread.start();
+    }
+
+    public void terminarPartida(Partida p){ //TODO: EN VEZ DE UN PARÁMETRO IGUAL TIENE QUE HACER EL NEW PARTIDA
+        p.getJugador().actualizarPartida(p);
+        comprobarPremios(p);
     }
 
     public int getLvl(){
@@ -689,6 +697,11 @@ public class ArkanoidFrontera {
      */
     public void borrarUsuarios() {
         GestorUsuarios.getGestorUsuarios().borrarUsuarios();
+        try {
+            DataBase.getmDataBase().borrarUsuarios();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 
 	public void cargarAjustes() {
@@ -708,5 +721,19 @@ public class ArkanoidFrontera {
         p.setBricks(BSR, BNR);
         p.setScores(lives, win, score);
         p.guardarEnBD();
+    }
+    
+    private void comprobarPremios(Partida p){
+        List<Premio> PC = GestorPremios.getGestorPremios().comprobarPremios(p);
+        List<Premio> PO = GestorPremios.getGestorPremios().otorgarPremios(p.getJugador(),PC);
+        if (PO.size()>0){
+            GestorPremios.getGestorPremios().annadirPremios(p, PO);
+            JSONObject premios = GestorPremios.getGestorPremios().obtenerNombresDescripciones(PO);
+            new PremiosConseguidos23(premios);
+        }
+        else{
+            //TODO: ABRIR PANTALLA COMPARTIR RESULTADOS
+        }
+
     }
 }

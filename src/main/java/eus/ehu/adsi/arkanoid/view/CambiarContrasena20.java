@@ -39,7 +39,7 @@ public class CambiarContrasena20 extends JFrame {
         this.setLayout(new BorderLayout());
 
         JPanel titulo = new JPanel();
-        titulo.setBackground(Config.BACKGROUND_COLOR);
+        titulo.setBackground(Color.BLACK);
         titulo.setLayout(new GridLayout(2,0));
 
         JLabel textoCambiarContrasena = new JLabel("Cambiar contraseña");
@@ -53,14 +53,14 @@ public class CambiarContrasena20 extends JFrame {
         titulo.add(textoNombreUsuario);
 
         JPanel contenedor = new JPanel();
-        contenedor.setBackground(Config.BACKGROUND_COLOR);
+        contenedor.setBackground(Color.BLACK);
         contenedor.setLayout(new GridBagLayout());
         contenedor.add(titulo);
 
         this.add(contenedor, BorderLayout.PAGE_START);
 
         JPanel campos = new JPanel();
-        campos.setBackground(Config.BACKGROUND_COLOR);
+        campos.setBackground(Color.BLACK);
         campos.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
@@ -100,7 +100,7 @@ public class CambiarContrasena20 extends JFrame {
         this.add(campos, BorderLayout.CENTER);
 
         JPanel botones = new JPanel();
-        botones.setBackground(Config.BACKGROUND_COLOR);
+        botones.setBackground(Color.BLACK);
         botones.add(botonCancelar());
         botones.add(botonAceptar());
         this.add(botones, BorderLayout.PAGE_END);
