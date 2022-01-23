@@ -99,6 +99,11 @@ public class GestorUsuarios {
      */
     public void cambiarContrasena(Usuario U, String contrasena) {
         U.setContrasena(contrasena);
+        try {
+            DataBase.getmDataBase().cambiarContrasena(U.getNombre(), contrasena);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 
     /**

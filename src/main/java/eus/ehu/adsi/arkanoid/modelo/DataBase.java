@@ -302,6 +302,21 @@ public class DataBase {
         return;
     }
 
+    public void cambiarContrasena(String nombreUsuario, String contrasena) throws SQLException {
+        Connection con = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error al registrar el driver de MySQL:" + e);
+        }
+        ResultSet rs;
+        Statement s = con.createStatement();
+        s.executeUpdate("UPDATE usuario SET contraseña = \""+contrasena+"\"WHERE nombreUsuario = \""+nombreUsuario+"\"");
+        con.close();
+        return;
+    }
+
     public void borrarUsuarios() throws SQLException {
         Connection con = null;
         try {
