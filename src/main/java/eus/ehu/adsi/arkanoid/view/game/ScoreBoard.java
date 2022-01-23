@@ -83,7 +83,11 @@ public class ScoreBoard {
 			if (text2 != null) {
 				g.setFont(font2);
 				g.drawString(text2, (Config.SCREEN_WIDTH / 2) - (titleLen / 2),
+<<<<<<< HEAD
 					titleHeight+40);
+=======
+						titleHeight+40);
+>>>>>>> origin/feature-premios
 			}
 		}
 	}

@@ -11,7 +11,7 @@ import java.util.Iterator;
 import org.json.JSONObject;
 
 public class DataBase {
-    
+
     private static DataBase mDataBase;
 
     private DataBase(){}
@@ -26,16 +26,16 @@ public class DataBase {
     public JSONObject jugadorPosGlobal(int p, int nivel) throws SQLException{
         Connection con = null;
         JSONObject jugadorPuntuacion = new JSONObject();
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
-		} catch (ClassNotFoundException e) {
-			System.out.println("Error al registrar el dirver de MySQL:" + e);
-		}
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error al registrar el dirver de MySQL:" + e);
+        }
         Statement s = con.createStatement();
         ResultSet rs;
-		if (nivel == 0){
-            rs = s.executeQuery("SELECT NombreUsuario, Puntuacion FROM Partida ORDER BY Puntuacion DESC, FechaFin ASC LIMIT 1 OFFSET " + (p-1));
+        if (nivel == 0){
+            rs = s.executeQuery("SELECT nombreUsuario, puntuacion FROM partida ORDER BY puntuacion DESC, fechaFin ASC LIMIT 1 OFFSET " + (p-1));
         }else{
             rs = s.executeQuery("SELECT NombreUsuario, Puntuacion FROM Partida WHERE NombreNivel=\""+ nivel + "\" ORDER BY Puntuacion DESC, FechaFin ASC LIMIT 1 OFFSET " + (p-1));
         }
@@ -51,12 +51,12 @@ public class DataBase {
     public JSONObject jugadorPosIndividual(int p, String nombre, int nivel) throws SQLException{
         JSONObject puntuacion = new JSONObject();
         Connection con = null;
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
-		} catch (ClassNotFoundException e) {
-			System.out.println("Error al registrar el dirver de MySQL:" + e);
-		}
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error al registrar el dirver de MySQL:" + e);
+        }
         Statement s = con.createStatement();
         ResultSet rs1;
         if (nivel == 0){
@@ -72,16 +72,16 @@ public class DataBase {
 
     public int nPartidasGlobal(int nivel) throws SQLException{
         Connection con = null;
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
-		} catch (ClassNotFoundException e) {
-			System.out.println("Error al registrar el dirver de MySQL:" + e);
-		}
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error al registrar el dirver de MySQL:" + e);
+        }
         Statement s = con.createStatement();
         ResultSet rs1;
         if (nivel == 0){
-		    rs1 = s.executeQuery("SELECT count(*) FROM Partida WHERE Victoria=1");
+            rs1 = s.executeQuery("SELECT count(*) FROM partida WHERE victoria=1");
             rs1.next();
         } else {
             rs1 = s.executeQuery("SELECT count(*) FROM Partida WHERE Victoria=1 AND NombreNivel=\""+nivel+"\"");
@@ -92,16 +92,16 @@ public class DataBase {
 
     public int nPartidasIndividual(String nombre, int nivel) throws SQLException{
         Connection con = null;
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
-		} catch (ClassNotFoundException e) {
-			System.out.println("Error al registrar el dirver de MySQL:" + e);
-		}
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error al registrar el dirver de MySQL:" + e);
+        }
         Statement s = con.createStatement();
         ResultSet rs1;
         if (nivel == 0){
-		    rs1 = s.executeQuery("SELECT count(*) FROM Partida WHERE Victoria=1 AND NombreUsuario=\"" + nombre + "\"");
+            rs1 = s.executeQuery("SELECT count(*) FROM partida WHERE victoria=1 AND nombreUsuario=\"" + nombre + "\"");
             rs1.next();
         }else{
             rs1 = s.executeQuery("SELECT count(*) FROM Partida WHERE Victoria=1 AND NombreUsuario=\"" + nombre + "\" AND NombreNivel=\""+ nivel +"\"");
@@ -113,12 +113,12 @@ public class DataBase {
     public JSONObject cargarDatosPersonalizacion(String nombreUsuario) throws SQLException{
         Connection con = null;
         JSONObject res = new JSONObject();
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
-		} catch (ClassNotFoundException e) {
-			System.out.println("Error al registrar el dirver de MySQL:" + e);
-		}
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error al registrar el dirver de MySQL:" + e);
+        }
         Statement s = con.createStatement();
         ResultSet rs;
         rs = s.executeQuery("SELECT sonidoAct, colorLadrillo, colorBola, colorPaddle, colorFondo FROM usuario WHERE nombreUsuario =\"" + nombreUsuario + "\"");
@@ -136,12 +136,12 @@ public class DataBase {
 
     public void actualizarPersonalizacion(String nombreUsuario, String colorBola, String colorPadel, String colorLadrillo,String colorFondo, boolean sonido) throws Exception {
         Connection con = null;
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
-		} catch (ClassNotFoundException e) {
-			System.out.println("Error al registrar el dirver de MySQL:" + e);
-		}
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error al registrar el dirver de MySQL:" + e);
+        }
         int son;
         Statement s = con.createStatement();
         if (sonido) son = 1;
@@ -152,13 +152,13 @@ public class DataBase {
     public JSONObject getColoresBola(String nombre) throws SQLException {
         JSONObject colores = new JSONObject();
         Connection con = null;
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
-		} catch (ClassNotFoundException e) {
-			System.out.println("Error al registrar el dirver de MySQL:" + e);
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error al registrar el dirver de MySQL:" + e);
             return null;
-		}
+        }
         Statement s = con.createStatement();
         ResultSet rs;
         rs = s.executeQuery("SELECT bolaNaranja, bolaRojo, bolaBlanco, bolaAzul FROM usuario WHERE nombreUsuario=\"" + nombre +"\"");
@@ -175,13 +175,13 @@ public class DataBase {
     public JSONObject getColoresFondo(String nombre) throws SQLException {
         JSONObject colores = new JSONObject();
         Connection con = null;
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
-		} catch (ClassNotFoundException e) {
-			System.out.println("Error al registrar el dirver de MySQL:" + e);
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error al registrar el dirver de MySQL:" + e);
             return null;
-		}
+        }
         Statement s = con.createStatement();
         ResultSet rs;
         rs = s.executeQuery("SELECT fondoNegro, fondoVerde, fondoMorado, fondoCyan FROM usuario WHERE nombreUsuario=\"" + nombre +"\"");
@@ -414,5 +414,17 @@ public class DataBase {
             maxPunt=rs.getInt(1);
         }
         return maxPunt;
+    }
+
+    public void annadirDesbloquable(String nombreUsuario, String nTabla) throws Exception {
+        Connection con = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://sql4.freesqldatabase.com/sql4466495", "sql4466495","NKihfwtwiR");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error al registrar el dirver de MySQL:" + e);
+        }
+        Statement s = con.createStatement();
+        s.executeUpdate("UPDATE usuario SET\""+nTabla+"\"=TRUE WHERE nombreUsuario =\""+nombreUsuario+"\"");
     }
 }

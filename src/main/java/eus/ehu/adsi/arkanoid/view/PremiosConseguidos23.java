@@ -64,7 +64,7 @@ public class PremiosConseguidos23 extends JFrame {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     frame.dispose();
-                    //TODO: ABRIR PANTALLA COMPARTIR RESULTADOS
+                    new PublicarResultados24a(datos);
                 }
             });
         }

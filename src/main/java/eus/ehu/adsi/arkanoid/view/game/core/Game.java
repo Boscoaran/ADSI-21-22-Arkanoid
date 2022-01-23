@@ -17,7 +17,7 @@ import eus.ehu.adsi.arkanoid.view.game.ScoreBoard;
 public class Game {
 	private boolean running;
 	private boolean tryAgain;
-	
+
 	public Game () {
 		this.setRunning(false);
 		this.setTryAgain(false);
@@ -38,7 +38,7 @@ public class Game {
 	public void setTryAgain(boolean tryAgain) {
 		this.tryAgain = tryAgain;
 	}
-	
+
 	public static void testCollision(Paddle mPaddle, Ball mBall, int nivel) {
 		if (!Game.isIntersecting(mPaddle, mBall))
 			return;
@@ -48,7 +48,6 @@ public class Game {
 		else
 			mBall.velocityX = Config.getBallVelocity(nivel);
 	}
-	
 	public static void testCollision(Brick mBrick, Ball mBall, ScoreBoard scoreboard, int nivel, Arkanoid a, JSONObject pr, String pNombre) {
 		if (!Game.isIntersecting(mBrick, mBall))
 			return;
@@ -62,7 +61,6 @@ public class Game {
 			if (pr == null) j = ArkanoidFrontera.getArkanoidFrontera().darVentaja(pNombre); //TO DO: Gestión de usuarios
 			else j = pr;
 			descrip = j.getString("descrip");
-			
 			if (!j.isNull("vidas")) {
 				int vidas = j.getInt("vidas");
 				scoreboard.updateLives(vidas);
@@ -95,12 +93,11 @@ public class Game {
 			mBall.velocityY = ballFromTop ? -Config.getBallVelocity(nivel) : Config.getBallVelocity(nivel);
 		}
 	}
-	
+
 	public static boolean isIntersecting(GameObject mA, GameObject mB) {
 		return mA.right() >= mB.left() && mA.left() <= mB.right()
 				&& mA.bottom() >= mB.top() && mA.top() <= mB.bottom();
 	}
-	
 	public static List<Brick> initializeBricks(List<Brick> bricks, int nivel, int pr) {
 		double ladrillosD = Config.getCountBlocksX(nivel)*Config.getCountBlocksY(nivel);
 		int ladrillos = (int)ladrillosD;
@@ -113,8 +110,8 @@ public class Game {
 			aparece = ArkanoidFrontera.getArkanoidFrontera().generarNumeroAleatorio(4,0);
 		}
 		int cant = ArkanoidFrontera.getArkanoidFrontera().generarNumeroAleatorio(ladrillos,1)-1;
-		
-		if (aparece == 0) cant = -1; 
+
+		if (aparece == 0) cant = -1;
 		boolean suerte = false;
 		bricks.clear();
 		int i = 0;
@@ -127,7 +124,7 @@ public class Game {
 						(iX + 1) * (Config.BLOCK_WIDTH + 3) + 22,
 						(iY + 2) * (Config.BLOCK_HEIGHT + 3) + 50,
 						suerte, i)
-						);
+				);
 				i++;
 				cant--;
 				suerte = false;
@@ -137,6 +134,5 @@ public class Game {
 	}
 
 }
-
 
 

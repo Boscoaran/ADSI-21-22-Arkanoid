@@ -15,6 +15,10 @@ public class Partida {
     private int nivel;
     private int numVidas;
     private List<Premio> listaPremios = new ArrayList<Premio>();
+<<<<<<< HEAD
+=======
+    private int numVidas;
+>>>>>>> origin/feature-premios
 
     public Partida(int puntos, int ladNorm, int ladEsp, boolean vic, Usuario j, int numVidas, int lvl) {
         puntuacion = puntos;
@@ -40,6 +44,7 @@ public class Partida {
         listaVentajas.add(v);
     }
 
+<<<<<<< HEAD
        public int getPuntuacion() {
     	return puntuacion;
     }
@@ -73,6 +78,40 @@ public class Partida {
         this.fechaFin = LocalDateTime.now();
     }
     
+=======
+    public int getPuntuacion() {
+        return puntuacion;
+    }
+
+    public Usuario getJugador() {
+        return jugador;
+    }
+
+    public void setHoraFin(LocalDateTime fechaHoraFin) {
+        fechaFin = fechaHoraFin;
+    }
+
+    public void setBricks(int bSR, int bNR) {
+        ladrillosNormalesDestruidos = bNR;
+        ladrillosEspecialesDestruidos = bSR;
+    }
+
+    public void setScores(int lives, boolean win, int score) {
+        numVidas = lives;
+        victoria = win;
+        puntuacion = score;
+
+    }
+
+    public void guardarEnBD() {
+        try {
+            DataBase.getmDataBase().guardarPartida(puntuacion, ladrillosNormalesDestruidos, ladrillosEspecialesDestruidos, victoria, jugador.getNombre(), fechaFin, numVidas, nivel);
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
+
+>>>>>>> origin/feature-premios
     public void annadirPremios(List<Premio> premios){
         listaPremios.addAll(premios);
     }
@@ -93,7 +132,12 @@ public class Partida {
         return nivel;
     }
 
+<<<<<<< HEAD
     public Usuario getJugador() {
         return jugador;
     }
 }
+=======
+
+}
+>>>>>>> origin/feature-premios

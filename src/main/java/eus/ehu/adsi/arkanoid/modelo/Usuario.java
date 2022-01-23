@@ -64,7 +64,11 @@ public class Usuario {
         this.colorLadrillos = new ColorLadrillos(colorLadrillo);
         this.sonido = new AjusteSonido(sonido);
     }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/feature-premios
     /**
      * Cambiar la contraseña actual
      * @param pContrasena contraseña nueva
@@ -74,9 +78,15 @@ public class Usuario {
     }
 
     public String getNombre() {
+<<<<<<< HEAD
     	return nombreUsuario;
     }
     
+=======
+        return nombreUsuario;
+    }
+
+>>>>>>> origin/feature-premios
     public List<Premio> otorgarPremios(List<Premio> pPremios){
         List<Premio> POtorgados = new ArrayList<Premio>();
         Premio PActual;
@@ -86,6 +96,24 @@ public class Usuario {
             if (!listaPremios.contains(PActual)){
                 POtorgados.add(PActual);
                 listaDesbloqueados.add(PActual.getRecompensa());
+            }
+        }
+        return POtorgados;
+    }
+
+    public List<Premio> otorgarPremiosBD(List<Premio> pPremios){
+        List<Premio> POtorgados = new ArrayList<Premio>();
+        Premio PActual;
+        Iterator<Premio> itr = pPremios.iterator();
+        while(itr.hasNext()){
+            PActual = itr.next();
+            if (!listaPremios.contains(PActual)){
+                POtorgados.add(PActual);
+                try {
+                    DataBase.getmDataBase().annadirDesbloquable(nombreUsuario,PActual.getnTabla());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
         return POtorgados;
@@ -141,4 +169,10 @@ public class Usuario {
     public int getnLadrillosE() {
         return nLadrillosE;
     }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+
 }

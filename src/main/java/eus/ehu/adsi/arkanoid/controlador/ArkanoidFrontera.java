@@ -1,6 +1,7 @@
 package eus.ehu.adsi.arkanoid.controlador;
 
 import java.sql.SQLException;
+import java.sql.Time;
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -17,7 +18,9 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import eus.ehu.adsi.arkanoid.modelo.*;
 import eus.ehu.adsi.arkanoid.view.PremiosConseguidos23;
+import eus.ehu.adsi.arkanoid.view.PublicarResultados24a;
 import org.json.JSONObject;
 
 import eus.ehu.adsi.arkanoid.view.game.core.*;
@@ -54,7 +57,9 @@ public class ArkanoidFrontera {
     private String correoArkanoid = "arkanoidrecovery@gmail.com";
     private String contrasenaArkanoid = "ARKpassword";
 
-    private ArkanoidFrontera() {}
+    private ArkanoidFrontera() {
+        GestorPremios.getGestorPremios().generarPremiosBD();
+    }
 
     public static ArkanoidFrontera getArkanoidFrontera() {
         if (mArkanoidFrontera == null) mArkanoidFrontera = new ArkanoidFrontera();
@@ -70,13 +75,9 @@ public class ArkanoidFrontera {
     }
 
     public JSONObject darVentaja(String nombreUsuario) {
-        Usuario u = GestorUsuarios.getGestorUsuarios().buscarUsuarioGestor(nombreUsuario); //Buscamos al usuario
-        if (u != null) {
-            int random = generarNumeroAleatorio(4, 1); //Se genera un número aleatorio para elegir la ventaja
-            return GestorPartidas.getGestorPartidas().crearVentaja(random, u); //Devolvemos el JSON generado tras crear una ventaja
-        } 
-        return null;
-        
+        Usuario u = GestorUsuarios.getGestorUsuarios().buscarUsuarioGestor(nombreUsuario);
+        int random = generarNumeroAleatorio(4, 1);
+        return GestorPartidas.getGestorPartidas().crearVentaja(random, u);
     }
 
     public int generarNumeroAleatorio(int max, int min) {
@@ -110,7 +111,7 @@ public class ArkanoidFrontera {
         JSONObject resultado = new JSONObject();
 
         //Buscar el usuario por su nombre de usuario
-        Usuario U = GestorUsuarios.getGestorUsuarios().buscarUsuario(nombreUsuario);
+        Usuario U = GestorUsuarios.getGestorUsuarios().buscarUsuario(nombreUsuario, contrasena);
 
         //Comprobar si el usuario existe
         if (U != null) {
@@ -259,7 +260,7 @@ public class ArkanoidFrontera {
             //Cerrar transporte
             transporte.close();
 
-        //Capturar excepciones
+            //Capturar excepciones
         } catch (AddressException e) {
             return "";
         } catch (MessagingException e) {
@@ -363,7 +364,7 @@ public class ArkanoidFrontera {
         //Comprobar que todos los campos estén rellenos
         if (!(nombreUsuario.equals("") || correo.equals("") || contrasena1.equals("") || contrasena2.equals(""))) {
             //Buscar el usuario por su nombre de usuario
-            Usuario U = GestorUsuarios.getGestorUsuarios().buscarUsuario(nombreUsuario);
+            Usuario U = GestorUsuarios.getGestorUsuarios().buscarUsuarioGestor(nombreUsuario);
 
             //Comprobar que el usuario no exista
             if (U == null) {
@@ -446,7 +447,7 @@ public class ArkanoidFrontera {
         //Comprobar que todos los campos estén rellenos
         if (!(nombreUsuario.equals("") || cAnterior.equals("") || cNueva1.equals("") || cNueva2.equals(""))) {
             //Buscar el usuario por su nombre de usuario
-            Usuario U = GestorUsuarios.getGestorUsuarios().buscarUsuario(nombreUsuario);
+            Usuario U = GestorUsuarios.getGestorUsuarios().buscarUsuarioGestor(nombreUsuario);
 
             //Comprobar si la contrasena anterior es correcta
             if (GestorUsuarios.getGestorUsuarios().esContrasena(U, cAnterior)) {
@@ -494,8 +495,8 @@ public class ArkanoidFrontera {
     public JSONObject jugadorPos(int pos, int nivel, String jugador){
         if (jugador == null){
             try {
-				return DataBase.getmDataBase().jugadorPosGlobal(pos, nivel);
-			} catch (SQLException e) {
+                return DataBase.getmDataBase().jugadorPosGlobal(pos, nivel);
+            } catch (SQLException e) {
                 System.err.println(e);
                 return null;
             }
@@ -512,11 +513,11 @@ public class ArkanoidFrontera {
     public int nPartidas(String jugador, int nivel) {
         if (jugador == null){
             try {
-				return DataBase.getmDataBase().nPartidasGlobal(nivel);
-			} catch (SQLException e) {
+                return DataBase.getmDataBase().nPartidasGlobal(nivel);
+            } catch (SQLException e) {
                 System.err.println(e);
-				return 0;
-			}
+                return 0;
+            }
         }else{
             try {
                 return DataBase.getmDataBase().nPartidasIndividual(jugador, nivel);
@@ -535,27 +536,22 @@ public class ArkanoidFrontera {
     public void comenzarPartida(int nivel, boolean sonido){
         Usuario u = GestorUsuarios.getGestorUsuarios().buscarUsuarioGestor(nombreUsuario);
         GestorPartidas.getGestorPartidas().crearPartida(u, nivel);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime fechaHoraInicio = LocalDateTime.now();
         fechaHoraInicioStr = dtf.format(fechaHoraInicio);
         lvl = nivel;
         if (sonido){
-        try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("src/main/resources/X2Download.com - Plan B - Si No Le Contesto [Official Video] (64 kbps).wav").getAbsoluteFile());
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            clip.start();
-           } catch(UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
-            System.err.println(ex);
-           }
+            try {
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("src/main/resources/X2Download.com - Plan B - Si No Le Contesto [Official Video] (64 kbps).wav").getAbsoluteFile());
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                clip.start();
+            } catch(UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+                System.err.println(ex);
+            }
         }
         ArkanoidThread arkanoidThread = new ArkanoidThread();
         arkanoidThread.start();
-    }
-
-    public void terminarPartida(Partida p){ //TODO: EN VEZ DE UN PARÁMETRO IGUAL TIENE QUE HACER EL NEW PARTIDA
-        p.getJugador().actualizarPartida(p);
-        comprobarPremios(p);
     }
 
     public int getLvl(){
@@ -563,9 +559,9 @@ public class ArkanoidFrontera {
     }
 
     public String generarMensaje(JSONObject datosPartida) {
-    	FraseMensaje f1= new FraseMensaje("pUsuario ha pResultado el nivel pNivel con una puntuacion de pPuntuacion. ");
-    	FraseMensaje f2= new FraseMensaje("La maxima puntuacion de pUsuario es pMaxPuntuacion. ");
-    	FraseMensaje f3= new FraseMensaje("");	//luego se creara una frase por cada premio conseguido en la partida
+        FraseMensaje f1= new FraseMensaje("pUsuario ha pResultado el nivel pNivel con una puntuacion de pPuntuacion. ");
+        FraseMensaje f2= new FraseMensaje("La maxima puntuacion de pUsuario es pMaxPuntuacion. ");
+        FraseMensaje f3= new FraseMensaje("");	//luego se creara una frase por cada premio conseguido en la partida
 
         //obtenemos el usuario de la partida para poder buscar su maxima puntuacion historica
         String nombreUsuario=String.valueOf(datosPartida.opt("usuario"));
@@ -573,16 +569,16 @@ public class ArkanoidFrontera {
 
         JSONObject datosMensaje=datosPartida.put("maxPunt",maxPunt);
 
-    	f1.asignarValoresAParametros(1,datosMensaje);
-    	f2.asignarValoresAParametros(2,datosMensaje);
-    	f3.asignarValoresAParametros(3,datosMensaje);
-    	
-    	//pasar mensaje a string
-    	String mensaje=f1.getFrase()+f2.getFrase()+f3.getFrase();
+        f1.asignarValoresAParametros(1,datosMensaje);
+        f2.asignarValoresAParametros(2,datosMensaje);
+        f3.asignarValoresAParametros(3,datosMensaje);
 
-    	return mensaje;
+        //pasar mensaje a string
+        String mensaje=f1.getFrase()+f2.getFrase()+f3.getFrase();
+
+        return mensaje;
     }
-    //Cargamos los datos de la base de datos 
+
     public JSONObject cargarDatosPersonalizacion(String nombre) {
         try {
             nombreUsuario = nombre;
@@ -592,7 +588,7 @@ public class ArkanoidFrontera {
             return null;
         }
     }
-    //Recogemos los colores de cada uno de los objetos: Bola, paddle, fondo y ladrillos
+    
     public JSONObject getColores(String objeto, String nombre){
         JSONObject colores;
         if (objeto == "fondo"){
@@ -630,7 +626,7 @@ public class ArkanoidFrontera {
         }
         return colores;
     }
-    //Recogemos el valor del sonido para poder mostrarlo en la interfaz
+    
     public static boolean getSonido(String nombre) {
         boolean b = false;
         try {
@@ -640,7 +636,7 @@ public class ArkanoidFrontera {
         }
         return b;
     }
-//Si seleccionamos el nombre del color lo transformamos en su color correspondiente
+
     public Color getColor(String obj, String nombre) {
         String colorStr = null;
         try {
@@ -696,24 +692,19 @@ public class ArkanoidFrontera {
      */
     public void borrarUsuarios() {
         GestorUsuarios.getGestorUsuarios().borrarUsuarios();
-        try {
-            DataBase.getmDataBase().borrarUsuarios();
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
     }
 
-	public void cargarAjustes() {
+    public void cargarAjustes() {
         Config.setBackgroundColor(getColor("Fondo", nombreUsuario));
-		Config.setLadrilloColor(getColor("Ladrillo", nombreUsuario));
-		Config.setBolaColor(getColor("Bola", nombreUsuario));
-		Config.setPaddleColor(getColor("Paddle",nombreUsuario));
+        Config.setLadrilloColor(getColor("Ladrillo", nombreUsuario));
+        Config.setBolaColor(getColor("Bola", nombreUsuario));
+        Config.setPaddleColor(getColor("Paddle",nombreUsuario));
         Config.setSonido(getSonido(nombreUsuario));
-	}
+    }
 
     public void guardarPartida(String nombre, int BSR, int BNR, int lives, boolean win, int score) {
         Usuario u = GestorUsuarios.getGestorUsuarios().buscarUsuarioGestor(nombre);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");  
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime fechaHoraFin = LocalDateTime.now();
         Partida p = GestorPartidas.getGestorPartidas().buscarPartidaActual(u);
         p.setHoraFin(fechaHoraFin);
@@ -721,18 +712,38 @@ public class ArkanoidFrontera {
         p.setScores(lives, win, score);
         p.guardarEnBD();
     }
-    
-    private void comprobarPremios(Partida p){
+
+    public void terminarPartida(Partida p){
+        p.getJugador().actualizarPartida(p);
+        generarJSON(p);
+    }
+
+    private void generarJSON(Partida p){
         List<Premio> PC = GestorPremios.getGestorPremios().comprobarPremios(p);
         List<Premio> PO = GestorPremios.getGestorPremios().otorgarPremios(p.getJugador(),PC);
+        JSONObject joDatos = new JSONObject();
+        annadirDatosPartida(p,joDatos);
         if (PO.size()>0){
             GestorPremios.getGestorPremios().annadirPremios(p, PO);
-            JSONObject premios = GestorPremios.getGestorPremios().obtenerNombresDescripciones(PO);
-            new PremiosConseguidos23(premios);
+            joDatos = GestorPremios.getGestorPremios().obtenerNombresDescripciones(PO,joDatos);
+            new PremiosConseguidos23(joDatos);
         }
         else{
-            //TODO: ABRIR PANTALLA COMPARTIR RESULTADOS
+            new PublicarResultados24a(joDatos);
         }
-
     }
+
+    private JSONObject annadirDatosPartida(Partida p, JSONObject joDatos){
+        joDatos.put("usuario",p.getJugador().getNombreUsuario());
+        if (p.isVictoria()){
+            joDatos.put("resultado","V");
+        }
+        else{
+            joDatos.put("resultado","V");
+        }
+        joDatos.put("nivel",p.getNivel());
+        joDatos.put("puntuacion",p.getPuntuacion());
+        return joDatos;
+    }
+
 }

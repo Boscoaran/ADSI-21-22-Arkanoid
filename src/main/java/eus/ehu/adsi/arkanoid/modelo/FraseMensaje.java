@@ -9,15 +9,15 @@ import org.json.JSONObject;
 public class FraseMensaje {
 
 	private String texto;
-	
+
 	public FraseMensaje(String pTexto) {
 		texto=pTexto;
 	}
-	
+
 	public String getFrase() {
 		return texto;
 	}
-	
+
 	public void asignarValoresAParametros(int numFrase, JSONObject pParametros) {
 		if (numFrase==1) {
 			String usuario=String.valueOf(pParametros.opt("usuario"));
@@ -41,7 +41,7 @@ public class FraseMensaje {
 			else if (nivel==3){
 				String stringNivel="dificil";
 				texto=texto + stringNivel + " con una puntuacion de ";
-			}	
+			}
 			String stringPuntuacion=String.valueOf(pParametros.opt("puntuacion"));
 			texto=texto + stringPuntuacion + ". ";
 		}
@@ -70,11 +70,11 @@ public class FraseMensaje {
 	}
 
 	private ArrayList<JSONObject> jAtoAL(JSONArray jA) {
-        ArrayList<JSONObject> AL = new ArrayList<JSONObject>();
-        for (int i = 0; i < jA.length(); i++) {
-            AL.add(jA.getJSONObject(i));
-        }
-        return AL;
-    }
-	
+		ArrayList<JSONObject> AL = new ArrayList<JSONObject>();
+		for (int i = 0; i < jA.length(); i++) {
+			AL.add(jA.getJSONObject(i));
+		}
+		return AL;
+	}
+
 }

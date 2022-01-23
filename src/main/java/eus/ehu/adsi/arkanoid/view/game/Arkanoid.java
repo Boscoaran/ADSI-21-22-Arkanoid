@@ -21,7 +21,7 @@ import org.apache.logging.log4j.Logger;
 import eus.ehu.adsi.arkanoid.controlador.ArkanoidFrontera;
 import eus.ehu.adsi.arkanoid.view.game.core.Game;
 
-public class Arkanoid extends JFrame implements KeyListener { 
+public class Arkanoid extends JFrame implements KeyListener {
 
 	// Housekeeping
 	private static final long serialVersionUID = 1L;
@@ -44,10 +44,10 @@ public class Arkanoid extends JFrame implements KeyListener {
 
 
 	private int nivel;
-	
+
 	public Arkanoid(int lvl, String pNombre) {
 
-		
+
 		nombre = pNombre;
 		game = new Game ();
 		nivel = lvl;
@@ -65,7 +65,7 @@ public class Arkanoid extends JFrame implements KeyListener {
 		bricks = Game.initializeBricks(bricks, nivel, -1);
 
 	}
-		
+
 
 	public void run() {
 
@@ -73,7 +73,7 @@ public class Arkanoid extends JFrame implements KeyListener {
 		Graphics g = bf.getDrawGraphics();
 		g.setColor(Color.black);
 		g.fillRect(0, 0, getWidth(), getHeight());
-		
+
 		game.setRunning(true);
 
 		while (game.isRunning()) {
@@ -164,11 +164,11 @@ public class Arkanoid extends JFrame implements KeyListener {
 
 		for (; currentSlice >= Config.FT_SLICE; currentSlice -= Config.FT_SLICE) {
 
-				if (ball != null) ball.update(scoreboard, paddle, nivel, this);
-				if (ball2 != null) ball2.update(scoreboard, paddle, nivel, this);
-				paddle.update(0);
-				if (ball != null) Game.testCollision(paddle, ball, nivel);
-				if (ball2 != null) Game.testCollision(paddle, ball2, nivel);
+			if (ball != null) ball.update(scoreboard, paddle, nivel, this);
+			if (ball2 != null) ball2.update(scoreboard, paddle, nivel, this);
+			paddle.update(0);
+			if (ball != null) Game.testCollision(paddle, ball, nivel);
+			if (ball2 != null) Game.testCollision(paddle, ball2, nivel);
 
 			Iterator<Brick> it = bricks.iterator();
 			while (it.hasNext()) {
@@ -231,25 +231,31 @@ public class Arkanoid extends JFrame implements KeyListener {
 			game.setTryAgain(true);
 		}
 		switch (event.getKeyCode()) {
-		case KeyEvent.VK_LEFT:
-			paddle.moveLeft();
-			break;
-		case KeyEvent.VK_RIGHT:
-			paddle.moveRight();
-			break;
-		default:
-			break;
+			case KeyEvent.VK_LEFT:
+				paddle.moveLeft();
+				break;
+			case KeyEvent.VK_RIGHT:
+				paddle.moveRight();
+				break;
+			default:
+				break;
 		}
+		if (scoreboard.win || scoreboard.gameOver) {
+			if (event.getKeyCode() == KeyEvent.VK_SPACE) {
+				this.dispose();
+			}
+		}
+
 	}
 
 	public void keyReleased(KeyEvent event) {
 		switch (event.getKeyCode()) {
-		case KeyEvent.VK_LEFT:
-		case KeyEvent.VK_RIGHT:
-			paddle.stopMove();
-			break;
-		default:
-			break;
+			case KeyEvent.VK_LEFT:
+			case KeyEvent.VK_RIGHT:
+				paddle.stopMove();
+				break;
+			default:
+				break;
 		}
 	}
 
@@ -257,7 +263,7 @@ public class Arkanoid extends JFrame implements KeyListener {
 
 	public void duplicarBola() {
 		if (ball2 == null)
-		ball2 = new Ball(Config.SCREEN_WIDTH / 2, Config.SCREEN_HEIGHT / 2, 2);
+			ball2 = new Ball(Config.SCREEN_WIDTH / 2, Config.SCREEN_HEIGHT / 2, 2);
 	}
 
 	public void eliminarLadrillos(int ladrillos, Brick mBrick) {
@@ -304,4 +310,3 @@ public class Arkanoid extends JFrame implements KeyListener {
 		return bricks;
 	}
 }
-

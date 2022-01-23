@@ -4,6 +4,7 @@ public class Premio {
     private String nombre;
     private String descripcion;
     private Personalizable recompensa;
+    private String nTabla;
 
     public Premio(String pNombre, String pDescripcion){
         nombre = pNombre;
@@ -14,6 +15,12 @@ public class Premio {
         nombre = pNombre;
         descripcion = pDescripcion;
         recompensa = pRecompensa;
+    }
+
+    public Premio(String pNombre, String pDescripcion, String pNTabla){
+        nombre = pNombre;
+        descripcion = pDescripcion;
+        nTabla = pNTabla;
     }
 
     public void setRecompensa(Personalizable pRecompensa) {
@@ -30,5 +37,9 @@ public class Premio {
 
     public Personalizable getRecompensa() {
         return recompensa;
+    }
+
+    public String getnTabla() {
+        return nTabla;
     }
 }

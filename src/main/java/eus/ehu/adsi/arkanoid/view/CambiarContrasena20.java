@@ -178,4 +178,8 @@ public class CambiarContrasena20 extends JFrame {
     private void cerrarActual() {
         this.dispose();
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/feature-premios

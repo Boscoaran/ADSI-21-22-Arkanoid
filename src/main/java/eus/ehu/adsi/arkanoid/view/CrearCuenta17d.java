@@ -50,7 +50,11 @@ public class CrearCuenta17d extends JFrame {
         north.add(titulo);
         north.add(titulo2);
         this.add(north, BorderLayout.NORTH);
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> origin/feature-premios
         JPanel campos = new JPanel();
         campos.setBackground(Color.BLACK);
         campos.setLayout(new GridBagLayout());
@@ -186,4 +190,8 @@ public class CrearCuenta17d extends JFrame {
     private void cerrarActual() {
         this.dispose();
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/feature-premios

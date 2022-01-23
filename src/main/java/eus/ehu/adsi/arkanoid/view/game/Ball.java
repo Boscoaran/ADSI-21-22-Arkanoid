@@ -55,8 +55,13 @@ public class Ball extends GameObject {
 					scoreBoard.die();
 				}
 			}
+<<<<<<< HEAD
 			
 			
+=======
+
+
+>>>>>>> origin/feature-premios
 		}
 
 	}

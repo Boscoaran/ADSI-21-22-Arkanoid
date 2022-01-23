@@ -12,4 +12,8 @@ public class MensajeError extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JOptionPane.showMessageDialog(this, mensaje, "Aviso", JOptionPane.WARNING_MESSAGE);
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/feature-premios

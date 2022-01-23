@@ -13,7 +13,7 @@ import eus.ehu.adsi.arkanoid.modelo.Ventaja;
 
 public class GestorPartidas {
     private List<Partida> lPartidas;
-    private static GestorPartidas mGestorPartidas = null; 
+    private static GestorPartidas mGestorPartidas = null;
 
     private GestorPartidas() {
         lPartidas = new ArrayList<Partida>();
@@ -49,9 +49,9 @@ public class GestorPartidas {
         this.lPartidas.add(p);
     }
 
-   public int obtenerMaxPuntUsuario(String nombreUsuario) {
+    public int obtenerMaxPuntUsuario(String nombreUsuario) {
         int maxPunt=0;
-    	try {
+        try {
             maxPunt=DataBase.getmDataBase().getMaxPunt(nombreUsuario);
         } catch (SQLException e) {
             e.printStackTrace();

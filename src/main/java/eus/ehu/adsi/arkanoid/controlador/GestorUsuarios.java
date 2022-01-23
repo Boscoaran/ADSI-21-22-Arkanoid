@@ -10,7 +10,7 @@ import eus.ehu.adsi.arkanoid.modelo.DataBase;
 import eus.ehu.adsi.arkanoid.modelo.Usuario;
 
 public class GestorUsuarios {
-    private static GestorUsuarios mGestorUsuarios = null; 
+    private static GestorUsuarios mGestorUsuarios = null;
     private List<Usuario> lUsuarios;
 
     private GestorUsuarios() {
@@ -22,24 +22,23 @@ public class GestorUsuarios {
         return mGestorUsuarios;
     }
 
-    public Usuario buscarUsuario(String nombreUsuario) {
+    public Usuario buscarUsuario(String nombreUsuario, String contra) {
+        Usuario u = null;
 
-        Usuario u = buscarUsuarioGestor(nombreUsuario);
         JSONObject j = null;
-
-        if (u == null) {
-            try {
-                j = DataBase.getmDataBase().buscarUsuario(nombreUsuario);
-            } catch (Exception e) {
-                System.err.println(e);
-            }
-
-            if (j.has("nombreUsuario")) {
-                u = new Usuario(j.getString("nombreUsuario"), j.getString("correo"), j.getString("contra"));
-                GestorUsuarios.getGestorUsuarios().anadir(u);
-            }
+        try {
+            j = DataBase.getmDataBase().buscarUsuario(nombreUsuario, contra);
+        } catch (Exception e) {
+            System.err.println(e);
         }
+
+        if (j.has("nombreUsuario")) {
+            u = new Usuario(j.getString("nombreUsuario"), j.getString("correo"), j.getString("contra"));
+            GestorUsuarios.getGestorUsuarios().anadir(u);
+        }
+
         return u;
+
     }
     public Usuario buscarUsuarioGestor(String nombreUsuario) {
         for (Usuario u : lUsuarios) {

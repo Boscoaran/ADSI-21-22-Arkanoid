@@ -15,7 +15,11 @@ public class MenuPrincipal18 extends JFrame {
 
     public MenuPrincipal18(String pNombreUsuario) {
 
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> origin/feature-premios
         this.nombreUsuario = pNombreUsuario;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setUndecorated(false);

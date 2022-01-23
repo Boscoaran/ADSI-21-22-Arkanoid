@@ -1,5 +1,5 @@
 package eus.ehu.adsi.arkanoid.view;
- 
+
 import eus.ehu.adsi.arkanoid.view.game.Config;
 
 import javax.swing.JFrame;
@@ -36,28 +36,33 @@ public class Personalizacion21 {
 	private JFrame frame;
 	private JPanel panelCentro;
 	private JButton btnAceptar;
-    private JButton btnCancelar;
-    private JButton btnSonido;
+	private JButton btnCancelar;
+	private JButton btnSonido;
 	private JLabel lblBackGround;
-    private JLabel lblBall;
-    private JLabel lblPaddle;
-    private JLabel lblLadrillo;
+	private JLabel lblBall;
+	private JLabel lblPaddle;
+	private JLabel lblLadrillo;
 	private JComboBox<String> comboBoxBackGround;
-    private JComboBox<String> comboBoxBall;
-    private JComboBox<String> comboBoxPaddle;
-    private JComboBox<String> comboBoxLadrillo;
+	private JComboBox<String> comboBoxBall;
+	private JComboBox<String> comboBoxPaddle;
+	private JComboBox<String> comboBoxLadrillo;
 	private boolean sonido;
 	private String nombreUsuario;
 	private JLabel lblTitulo;
 	private Font impact = AddFont.createFont();
+<<<<<<< HEAD
 	
 	
+=======
+
+
+>>>>>>> origin/feature-premios
 	public Personalizacion21(String nombre) {
 		nombreUsuario = nombre;
 		initialize();
 	}
-	
-	
+
+
 	private void initialize() {
 		JSONObject j = ArkanoidFrontera.getArkanoidFrontera().cargarDatosPersonalizacion(nombreUsuario);
 		frame = new JFrame();
@@ -71,7 +76,11 @@ public class Personalizacion21 {
 		frame.setBackground(Color.BLACK);
 		frame.setVisible(true);
 	}
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> origin/feature-premios
 	private JPanel getPanelCentro(JSONObject j) {
 		if (panelCentro == null) {
 			panelCentro = new JPanel();
@@ -91,7 +100,11 @@ public class Personalizacion21 {
 			gbc_lblTitulo.gridy = 0;
 			panelCentro.add(getLblTitulo(), gbc_lblTitulo);
 
+<<<<<<< HEAD
             //LBL BG
+=======
+			//LBL BG
+>>>>>>> origin/feature-premios
 			GridBagConstraints gbc_lblBackGround = new GridBagConstraints();
 			gbc_lblBackGround.anchor = GridBagConstraints.EAST;
 			gbc_lblBackGround.insets = new Insets(0, 0, 0, 0);
@@ -99,24 +112,24 @@ public class Personalizacion21 {
 			gbc_lblBackGround.gridy = 0;
 			panelCentro.add(getLblBackGround(), gbc_lblBackGround);
 
-            //LBL BALL
-            GridBagConstraints gbc_lblBall = new GridBagConstraints();
+			//LBL BALL
+			GridBagConstraints gbc_lblBall = new GridBagConstraints();
 			gbc_lblBall.anchor = GridBagConstraints.EAST;
 			gbc_lblBall.insets = new Insets(0, 0, 0, 0);
 			gbc_lblBall.gridx = 0;
 			gbc_lblBall.gridy = 1;
 			panelCentro.add(getLblBall(), gbc_lblBall);
 
-            //LBL PADDLE
-            GridBagConstraints gbc_lblPaddle = new GridBagConstraints();
+			//LBL PADDLE
+			GridBagConstraints gbc_lblPaddle = new GridBagConstraints();
 			gbc_lblPaddle.anchor = GridBagConstraints.EAST;
 			gbc_lblPaddle.insets = new Insets(0, 0, 0, 0);
 			gbc_lblPaddle.gridx = 0;
 			gbc_lblPaddle.gridy = 2;
 			panelCentro.add(getLblPaddle(), gbc_lblPaddle);
 
-            //LBL LADRILLO
-            GridBagConstraints gbc_lblLadrillo = new GridBagConstraints();
+			//LBL LADRILLO
+			GridBagConstraints gbc_lblLadrillo = new GridBagConstraints();
 			gbc_lblLadrillo.anchor = GridBagConstraints.EAST;
 			gbc_lblLadrillo.insets = new Insets(0, 0, 0, 0);
 			gbc_lblLadrillo.gridx = 0;
@@ -124,7 +137,7 @@ public class Personalizacion21 {
 			panelCentro.add(getLblLadrillo(), gbc_lblLadrillo);
 
 
-            //CB BG
+			//CB BG
 			GridBagConstraints gbc_comboBoxBackGround = new GridBagConstraints();
 			gbc_comboBoxBackGround.insets = new Insets(0, 10, 0, 0);
 			gbc_comboBoxBackGround.fill = GridBagConstraints.HORIZONTAL;
@@ -132,8 +145,8 @@ public class Personalizacion21 {
 			gbc_comboBoxBackGround.gridy = 0;
 			panelCentro.add(getComboBoxBackGround(), gbc_comboBoxBackGround);
 
-            //CB BALL
-            GridBagConstraints gbc_comboBoxBall = new GridBagConstraints();
+			//CB BALL
+			GridBagConstraints gbc_comboBoxBall = new GridBagConstraints();
 			gbc_comboBoxBall.insets = new Insets(0, 10, 0, 0);
 			gbc_comboBoxBall.fill = GridBagConstraints.HORIZONTAL;
 			gbc_comboBoxBall.gridx = 1;
@@ -141,8 +154,13 @@ public class Personalizacion21 {
 			panelCentro.add(getComboBoxBall(), gbc_comboBoxBall);
 
 
+<<<<<<< HEAD
             //CB PADDLE
             GridBagConstraints gbc_comboBoxPaddle = new GridBagConstraints();
+=======
+			//CB PADDLE
+			GridBagConstraints gbc_comboBoxPaddle = new GridBagConstraints();
+>>>>>>> origin/feature-premios
 			gbc_comboBoxPaddle.insets = new Insets(0, 10, 0, 0);
 			gbc_comboBoxPaddle.fill = GridBagConstraints.HORIZONTAL;
 			gbc_comboBoxPaddle.gridx = 1;
@@ -151,40 +169,46 @@ public class Personalizacion21 {
 			
 			
 
-            //CB LADRILLO
-            GridBagConstraints gbc_comboBoxLadrillo = new GridBagConstraints();
+
+
+			//CB LADRILLO
+			GridBagConstraints gbc_comboBoxLadrillo = new GridBagConstraints();
 			gbc_comboBoxLadrillo.insets = new Insets(0, 10, 0, 0);
 			gbc_comboBoxLadrillo.fill = GridBagConstraints.HORIZONTAL;
 			gbc_comboBoxLadrillo.gridx = 1;
 			gbc_comboBoxLadrillo.gridy = 3;
 			panelCentro.add(getComboBoxLadrillo(), gbc_comboBoxLadrillo);
 
-            //BTN SONIDO
+			//BTN SONIDO
 			GridBagConstraints gbc_btnSonido= new GridBagConstraints();
 			gbc_btnSonido.insets = new Insets(0, 0, 0, 0);
-            gbc_btnSonido.fill = GridBagConstraints.BOTH;
+			gbc_btnSonido.fill = GridBagConstraints.BOTH;
 			gbc_btnSonido.gridx = 3;
 			gbc_btnSonido.gridy = 2;
 			panelCentro.add(getBtnSonido(j.getInt("Sonido")), gbc_btnSonido);
 
-            //BTN ACEPTAR
+			//BTN ACEPTAR
 			GridBagConstraints gbc_btnAceptar = new GridBagConstraints();
 			gbc_btnAceptar.insets = new Insets(0, 0, 0, 0);
 			gbc_btnAceptar.gridx = 3;
 			gbc_btnAceptar.gridy = 4;
 			panelCentro.add(getBtnAceptar(), gbc_btnAceptar);
 
-            //BTN CANCELAR
-            GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
+			//BTN CANCELAR
+			GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
 			gbc_btnCancelar.insets = new Insets(0, 0, 0, 0);
 			gbc_btnCancelar.gridx = 1;
 			gbc_btnCancelar.gridy = 4;
 			panelCentro.add(getBtnCancelar(), gbc_btnCancelar);
 			panelCentro.setBackground(Color.BLACK);
-          	}
+		}
 		return panelCentro;
 	}
+<<<<<<< HEAD
 	//BTN ACEPTAR permite guardar los datos seleccionados por el usuario
+=======
+
+>>>>>>> origin/feature-premios
 	private JButton getBtnAceptar() {
 		if (btnAceptar == null) {
 			btnAceptar = new JButton("Aceptar");
@@ -196,7 +220,11 @@ public class Personalizacion21 {
 			btnAceptar.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
+<<<<<<< HEAD
 					
+=======
+
+>>>>>>> origin/feature-premios
 					String colorBola = comboBoxBall.getSelectedItem().toString();
 					String colorPadel = comboBoxPaddle.getSelectedItem().toString();
 					String colorLadrillo = comboBoxLadrillo.getSelectedItem().toString();
@@ -218,8 +246,13 @@ public class Personalizacion21 {
 		}
 		return btnAceptar;
 	}
+<<<<<<< HEAD
 	//BTN CANCELAR permite cancelar los cambios hechos y devuelve al menú principal
     private JButton getBtnCancelar() {
+=======
+
+	private JButton getBtnCancelar() {
+>>>>>>> origin/feature-premios
 		if (btnCancelar == null) {
 			btnCancelar = new JButton("Cancelar");
 			btnCancelar.setBorderPainted(false);
@@ -251,7 +284,11 @@ public class Personalizacion21 {
 			lblTitulo = new JLabel("Ajustes", JLabel.CENTER);
 			lblTitulo.setFont(impact.deriveFont(80.0f));
 			lblTitulo.setForeground(Color.WHITE);
+<<<<<<< HEAD
 			}
+=======
+		}
+>>>>>>> origin/feature-premios
 		return lblTitulo;
 	}
 	private JLabel getLblBackGround() {
@@ -259,38 +296,38 @@ public class Personalizacion21 {
 			lblBackGround = new JLabel("Fondo:", JLabel.CENTER);
 			lblBackGround.setFont(impact.deriveFont(30.0f));
 			lblBackGround.setForeground(Color.WHITE);
-			}
+		}
 		return lblBackGround;
 	}
 
-    private JLabel getLblBall() {
+	private JLabel getLblBall() {
 		if (lblBall == null) {
 			lblBall = new JLabel("Bola:", JLabel.CENTER);
 			lblBall.setFont(impact.deriveFont(30.0f));
 			lblBall.setForeground(Color.WHITE);
-			}
+		}
 		return lblBall;
 	}
 
-    private JLabel getLblPaddle() {
+	private JLabel getLblPaddle() {
 		if (lblPaddle == null) {
 			lblPaddle = new JLabel("Paddle:", JLabel.CENTER);
 			lblPaddle.setFont(impact.deriveFont(30.0f));
 			lblPaddle.setForeground(Color.WHITE);
-			}
+		}
 		return lblPaddle;
 	}
 
-    private JLabel getLblLadrillo() {
+	private JLabel getLblLadrillo() {
 		if (lblLadrillo == null) {
 			lblLadrillo = new JLabel("Ladrillo:", JLabel.CENTER);
 			lblLadrillo.setFont(impact.deriveFont(30.0f));
 			lblLadrillo.setForeground(Color.WHITE);
-			}
+		}
 		return lblLadrillo;
 	}
 
-    private JComboBox<String> getComboBoxBackGround() {
+	private JComboBox<String> getComboBoxBackGround() {
 		if (comboBoxBackGround == null) {
 			comboBoxBackGround = new JComboBox<String>();
 			JSONObject colores = ArkanoidFrontera.getArkanoidFrontera().getColores("fondo", nombreUsuario);
@@ -302,7 +339,7 @@ public class Personalizacion21 {
 		return comboBoxBackGround;
 	}
 
-    private JComboBox<String> getComboBoxBall() {
+	private JComboBox<String> getComboBoxBall() {
 		if (comboBoxBall == null) {
 			comboBoxBall = new JComboBox<String>();
 			JSONObject colores = ArkanoidFrontera.getArkanoidFrontera().getColores("bola", nombreUsuario);
@@ -314,7 +351,7 @@ public class Personalizacion21 {
 		return comboBoxBall;
 	}
 
-    private JComboBox<String> getComboBoxPaddle() {
+	private JComboBox<String> getComboBoxPaddle() {
 		if (comboBoxPaddle == null) {
 			comboBoxPaddle = new JComboBox<String>();
 			JSONObject colores = ArkanoidFrontera.getArkanoidFrontera().getColores("paddle", nombreUsuario);
@@ -326,7 +363,7 @@ public class Personalizacion21 {
 		return comboBoxPaddle;
 	}
 
-    private JComboBox<String> getComboBoxLadrillo() {
+	private JComboBox<String> getComboBoxLadrillo() {
 		if (comboBoxLadrillo == null) {
 			comboBoxLadrillo = new JComboBox<String>();
 			JSONObject colores = ArkanoidFrontera.getArkanoidFrontera().getColores("ladrillo", nombreUsuario);
@@ -337,7 +374,11 @@ public class Personalizacion21 {
 		}
 		return comboBoxLadrillo;
 	}
+<<<<<<< HEAD
 	//Añadimos los colores seleccionados al desplegable
+=======
+
+>>>>>>> origin/feature-premios
 	private void añadirColores(JComboBox comboBox, JSONObject colores){
 		Iterator <String> keys = colores.keys();
 		while(keys.hasNext()){
@@ -362,6 +403,7 @@ public class Personalizacion21 {
 				comboBox.addItem(sb.toString());
 			}
 		}
+<<<<<<< HEAD
 		
 	}
 	//Si el sonido esta pulsado se muestra su correspondiente imagen y activa la cancion
@@ -369,6 +411,15 @@ public class Personalizacion21 {
 		if (btnSonido == null) {
 			
             btnSonido = new JButton("");
+=======
+
+	}
+
+	private JButton getBtnSonido(int s) {
+		if (btnSonido == null) {
+
+			btnSonido = new JButton("");
+>>>>>>> origin/feature-premios
 			try {
 				ImageIcon imgIcon;
 				if (s == 1) {
@@ -377,6 +428,7 @@ public class Personalizacion21 {
 				} else {
 					sonido = false;
 					imgIcon = new ImageIcon("src/main/resources/muted.png");
+<<<<<<< HEAD
 				} 
                 Image image = imgIcon.getImage();
 				Image imageReszie = image.getScaledInstance(100,80, java.awt.Image.SCALE_SMOOTH);
@@ -387,23 +439,43 @@ public class Personalizacion21 {
             }
 
             btnSonido.setContentAreaFilled(false);
+=======
+				}
+				Image image = imgIcon.getImage();
+				Image imageReszie = image.getScaledInstance(100,80, java.awt.Image.SCALE_SMOOTH);
+				imgIcon = new ImageIcon(imageReszie);
+				btnSonido.setIcon(imgIcon);
+			} catch (Exception ex){
+				System.out.println(ex);
+			}
+
+			btnSonido.setContentAreaFilled(false);
+>>>>>>> origin/feature-premios
 			btnSonido.setFocusPainted(false);
 			btnSonido.setBorderPainted(false);
-            btnSonido.setBackground(Color.BLACK);
-            btnSonido.setBorder(null);
+			btnSonido.setBackground(Color.BLACK);
+			btnSonido.setBorder(null);
 			btnSonido.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					if (sonido){
 						ImageIcon imgIcon = new ImageIcon("src/main/resources/muted.png");
+<<<<<<< HEAD
                 		Image image = imgIcon.getImage();
+=======
+						Image image = imgIcon.getImage();
+>>>>>>> origin/feature-premios
 						Image imageReszie = image.getScaledInstance(100,80, java.awt.Image.SCALE_SMOOTH);
 						imgIcon = new ImageIcon(imageReszie);
 						btnSonido.setIcon(imgIcon);
 						sonido = false;
 					} else {
 						ImageIcon imgIcon = new ImageIcon("src/main/resources/unmuted.png");
+<<<<<<< HEAD
                			Image image = imgIcon.getImage();
+=======
+						Image image = imgIcon.getImage();
+>>>>>>> origin/feature-premios
 						Image imageReszie = image.getScaledInstance(100,80, java.awt.Image.SCALE_SMOOTH);
 						imgIcon = new ImageIcon(imageReszie);
 						btnSonido.setIcon(imgIcon);
